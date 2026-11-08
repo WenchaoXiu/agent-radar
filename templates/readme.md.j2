@@ -1,0 +1,32 @@
+# Agent Radar
+
+AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日自动更新。
+
+更新时间：{{ generated_at }} UTC · 收录仓库：{{ repo_count | thousands }} 个（star ≥ {{ min_stars }}，不含 fork 和已归档仓库）
+
+- [总榜 Top {{ total | length }}](#总榜)
+- [新项目 Top {{ new | length }}](#新项目)
+
+## 总榜
+
+| # | 仓库 | 简介 | Star | 语言 | 最近推送 |
+|---:|---|---|---:|---|---|
+{% for r in total -%}
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.description | cell }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
+{% endfor %}
+## 新项目
+
+{{ new_repo_days }} 天内创建且 star ≥ {{ min_stars }}。
+
+{% if new -%}
+| # | 仓库 | 简介 | Star | 语言 | 创建日期 |
+|---:|---|---|---:|---|---|
+{% for r in new -%}
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.description | cell }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.created_at | day }} |
+{% endfor %}
+{%- else -%}
+暂无符合条件的新项目。
+{% endif %}
+---
+
+数据来源：GitHub Search API。本页由 agent-radar 自动生成，请勿手动编辑。

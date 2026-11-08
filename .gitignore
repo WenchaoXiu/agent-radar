@@ -18,6 +18,9 @@ out/
 # Private plan and phase reports
 plan/
 
+# Rebuilt from the API on every run; only snapshots are kept in history
+data/repos.json
+
 # OS / editor
 .DS_Store
 .vscode/
