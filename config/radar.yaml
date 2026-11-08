@@ -41,7 +41,10 @@ exclude:
   archived: true
   repos: []          # 手动黑名单
 llm:
-  enabled: false     # P2 配置中转站后再开启
-  classify_model: ""
-  agent_model: ""
-  writer_model: ""
+  enabled: true
+  # effort: low | medium | high，作为 reasoning_effort 传给中转站；留空则不传
+  classify: { model: "claude-sonnet-5-5", effort: low }
+  agent:    { model: "claude-opus-5-5",   effort: high }
+  writer:   { model: "claude-opus-5-5",   effort: medium }
+  classify_batch_size: 10
+  readme_chars: 2000

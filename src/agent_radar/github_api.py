@@ -13,7 +13,9 @@ MAX_WAIT = 300
 
 
 class GitHubError(RuntimeError):
-    pass
+    def __init__(self, message: str, status: int | None = None) -> None:
+        super().__init__(message)
+        self.status = status
 
 
 class GitHubClient:
@@ -49,7 +51,17 @@ class GitHubClient:
     def search_repos(self, q: str, page: int = 1, per_page: int = 100) -> dict:
         self._throttle()
         params = {"q": q, "sort": "stars", "order": "desc", "per_page": per_page, "page": page}
-        return self._get("/search/repositories", params)
+        return self._get("/search/repositories", params).json()
+
+    def get_readme(self, repo: str) -> str:
+        """Raw README text, or "" if the repo has none."""
+        try:
+            resp = self._get(f"/repos/{repo}/readme", {}, {"Accept": "application/vnd.github.raw+json"})
+        except GitHubError as exc:
+            if exc.status == 404:
+                return ""
+            raise
+        return resp.text
 
     def _throttle(self) -> None:
         now = self._clock()
@@ -60,20 +72,20 @@ class GitHubClient:
                 now = self._clock()
         self._last_search = now
 
-    def _get(self, path: str, params: dict) -> dict:
+    def _get(self, path: str, params: dict, headers: dict | None = None) -> httpx.Response:
         for attempt in range(self._max_retries + 1):
             try:
-                resp = self._http.get(path, params=params)
+                resp = self._http.get(path, params=params, headers=headers)
             except httpx.TransportError as exc:
                 wait = 2**attempt
                 log.warning("network error %s, retry in %ss", type(exc).__name__, wait)
             else:
                 self.request_count += 1
                 if resp.status_code == 200:
-                    return resp.json()
+                    return resp
                 wait = self._retry_wait(resp, attempt)
                 if wait is None:
-                    raise GitHubError(f"GET {path} -> {resp.status_code}: {_message(resp)}")
+                    raise GitHubError(f"GET {path} -> {resp.status_code}: {_message(resp)}", resp.status_code)
                 log.warning("GET %s -> %s, retry in %ss", path, resp.status_code, wait)
             if attempt < self._max_retries:
                 self._sleep(wait)

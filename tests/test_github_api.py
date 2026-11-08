@@ -52,6 +52,18 @@ def test_plain_403_raises_without_retry():
     assert sleeps == []
 
 
+def test_get_readme_raw_and_missing():
+    def handler(request):
+        if request.url.path == "/repos/o/none/readme":
+            return httpx.Response(404, json={"message": "Not Found"})
+        assert request.headers["Accept"] == "application/vnd.github.raw+json"
+        return httpx.Response(200, text="# Hello")
+
+    client, _ = make_client(handler)
+    assert client.get_readme("o/a") == "# Hello"
+    assert client.get_readme("o/none") == ""
+
+
 def test_throttles_search_requests():
     t = [0.0]
     sleeps: list[float] = []

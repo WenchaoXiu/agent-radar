@@ -6,6 +6,32 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG_PATH = ROOT / "config" / "radar.yaml"
+EFFORTS = ("low", "medium", "high")
+
+
+@dataclass(frozen=True)
+class ModelConfig:
+    model: str
+    effort: str | None = None
+
+
+@dataclass(frozen=True)
+class LLMConfig:
+    enabled: bool = False
+    classify: ModelConfig | None = None
+    agent: ModelConfig | None = None
+    writer: ModelConfig | None = None
+    classify_batch_size: int = 10
+    readme_chars: int = 2000
+
+
+def _model_cfg(raw: dict | None) -> ModelConfig | None:
+    if not raw or not raw.get("model"):
+        return None
+    effort = raw.get("effort") or None
+    if effort is not None and effort not in EFFORTS:
+        raise ValueError(f"invalid effort {effort!r}, expected one of {EFFORTS}")
+    return ModelConfig(model=str(raw["model"]), effort=effort)
 
 
 @dataclass(frozen=True)
@@ -18,7 +44,7 @@ class Config:
     exclude_forks: bool = True
     exclude_archived: bool = True
     exclude_repos: frozenset[str] = field(default_factory=frozenset)
-    llm: dict = field(default_factory=dict)
+    llm: LLMConfig = field(default_factory=LLMConfig)
 
     @property
     def all_queries(self) -> list[str]:
@@ -30,6 +56,7 @@ def load_config(path: Path = CONFIG_PATH) -> Config:
     queries = raw.get("queries", {})
     thresholds = raw.get("thresholds", {})
     exclude = raw.get("exclude", {})
+    llm = raw.get("llm") or {}
     return Config(
         precise_queries=list(queries.get("precise") or []),
         broad_queries=list(queries.get("broad") or []),
@@ -39,7 +66,14 @@ def load_config(path: Path = CONFIG_PATH) -> Config:
         exclude_forks=bool(exclude.get("forks", True)),
         exclude_archived=bool(exclude.get("archived", True)),
         exclude_repos=frozenset(r.lower() for r in exclude.get("repos") or []),
-        llm=dict(raw.get("llm") or {}),
+        llm=LLMConfig(
+            enabled=bool(llm.get("enabled", False)),
+            classify=_model_cfg(llm.get("classify")),
+            agent=_model_cfg(llm.get("agent")),
+            writer=_model_cfg(llm.get("writer")),
+            classify_batch_size=int(llm.get("classify_batch_size", 10)),
+            readme_chars=int(llm.get("readme_chars", 2000)),
+        ),
     )
 
 

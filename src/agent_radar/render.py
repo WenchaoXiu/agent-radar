@@ -1,3 +1,4 @@
+from collections.abc import Collection
 from datetime import date, datetime
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
@@ -19,6 +20,8 @@ def md_cell(value: object, max_len: int = DESC_MAX) -> str:
         .replace("<", "&lt;")
         .replace(">", "&gt;")
         .replace("|", "\\|")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
     )
 
 
@@ -41,10 +44,12 @@ def render_readme(
     snapshot: dict[str, list[int]],
     today: date,
     generated_at: datetime,
+    labels: dict[str, dict] | None = None,
+    skip: Collection[str] = (),
 ) -> str:
     return _env().get_template("readme.md.j2").render(
-        total=rank.rank_total(meta, snapshot, cfg),
-        new=rank.rank_new(meta, snapshot, cfg, today),
+        total=rank.rank_total(meta, snapshot, cfg, labels, skip),
+        new=rank.rank_new(meta, snapshot, cfg, today, labels, skip),
         repo_count=len(snapshot),
         min_stars=cfg.min_stars,
         new_repo_days=cfg.new_repo_days,

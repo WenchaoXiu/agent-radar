@@ -25,6 +25,18 @@ def load_repos(data_dir: Path = DATA_DIR) -> dict[str, dict]:
     return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
 
 
+def save_classified(labels: dict[str, dict], data_dir: Path = DATA_DIR) -> Path:
+    lines = [f"{json.dumps(n)}: {json.dumps(v, ensure_ascii=False, sort_keys=True)}" for n, v in sorted(labels.items())]
+    path = data_dir / "classified.json"
+    _write(path, "{\n" + ",\n".join(lines) + "\n}\n")
+    return path
+
+
+def load_classified(data_dir: Path = DATA_DIR) -> dict[str, dict]:
+    path = data_dir / "classified.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+
+
 def snapshot_path(day: date, data_dir: Path = DATA_DIR) -> Path:
     return data_dir / "snapshots" / f"{day:%Y}" / f"{day:%m-%d}.json"
 
