@@ -1,0 +1,47 @@
+queries:
+  precise:          # 命中即视为相关，LLM 只负责分类和中文简介
+    - topic:ai-agents
+    - topic:ai-agent
+    - topic:llm-agent
+    - topic:autonomous-agents
+    - topic:multi-agent
+    - topic:agentic-ai
+    - topic:agent-framework
+    - topic:coding-agent
+    - topic:mcp
+    - topic:model-context-protocol
+    - topic:mcp-server
+    - topic:mcp-client
+    - topic:mcp-tools
+    - topic:claude-skills
+    - topic:agent-skills
+    - topic:claude-code-skills
+    - topic:agent-harness
+    - topic:claude-code
+    - topic:codex-cli
+  broad:            # 需要 LLM 判断相关性
+    - topic:agents
+    - topic:agent
+    - topic:skills
+    - topic:harness
+    - '"ai agent" in:description'
+    - '"mcp server" in:description'
+    - '"agent skills" in:description'
+    - '"agent harness" in:description'
+thresholds:
+  min_stars: 100
+  new_repo_days: 30
+boards:
+  total: 100
+  daily: 50
+  weekly: 50
+  new: 50
+exclude:
+  forks: true
+  archived: true
+  repos: []          # 手动黑名单
+llm:
+  enabled: false     # P2 配置中转站后再开启
+  classify_model: ""
+  agent_model: ""
+  writer_model: ""
