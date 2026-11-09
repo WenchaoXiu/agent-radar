@@ -21,8 +21,11 @@ class LLMConfig:
     classify: ModelConfig | None = None
     agent: ModelConfig | None = None
     writer: ModelConfig | None = None
-    classify_batch_size: int = 10
-    readme_chars: int = 2000
+    classify_batch_size: int = 1
+    classify_workers: int = 4
+    readme_chars: int = 20000
+    refresh_days: int = 30
+    refresh_per_run: int = 20
 
 
 def _model_cfg(raw: dict | None) -> ModelConfig | None:
@@ -71,8 +74,11 @@ def load_config(path: Path = CONFIG_PATH) -> Config:
             classify=_model_cfg(llm.get("classify")),
             agent=_model_cfg(llm.get("agent")),
             writer=_model_cfg(llm.get("writer")),
-            classify_batch_size=int(llm.get("classify_batch_size", 10)),
-            readme_chars=int(llm.get("readme_chars", 2000)),
+            classify_batch_size=int(llm.get("classify_batch_size", 1)),
+            classify_workers=int(llm.get("classify_workers", 4)),
+            readme_chars=int(llm.get("readme_chars", 20000)),
+            refresh_days=int(llm.get("refresh_days", 30)),
+            refresh_per_run=int(llm.get("refresh_per_run", 20)),
         ),
     )
 

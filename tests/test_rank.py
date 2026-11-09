@@ -48,3 +48,22 @@ def test_new_window_and_min_stars(cfg, today):
 def test_new_skips_missing_created_at(cfg, today):
     m = {"a/a": meta(created=None)}
     assert rank.rank_new(m, {"a/a": [500, 0]}, cfg, today) == []
+
+
+def test_by_category_grouped_ordered_and_limited():
+    cfg = make_cfg(boards={"category": 2})
+    names = ["a/1", "a/2", "a/3", "b/1", "x/1", "u/1"]
+    m = {n: meta() for n in names}
+    snap = {"a/1": [100, 0], "a/2": [300, 0], "a/3": [200, 0], "b/1": [50, 0], "x/1": [999, 0], "u/1": [800, 0]}
+    labels = {
+        "a/1": {"relevant": True, "category": "A"},
+        "a/2": {"relevant": True, "category": "A"},
+        "a/3": {"relevant": True, "category": "A"},
+        "b/1": {"relevant": True, "category": "B"},
+        "x/1": {"relevant": False, "category": None},
+    }
+    boards = rank.rank_by_category(m, snap, cfg, ["B", "C", "A"], labels)
+    assert [(c, [(r["rank"], r["repo"]) for r in rows]) for c, rows in boards] == [
+        ("B", [(1, "b/1")]),
+        ("A", [(1, "a/2"), (2, "a/3")]),
+    ]

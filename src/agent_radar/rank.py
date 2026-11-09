@@ -84,6 +84,22 @@ def rank_new(meta, snapshot, cfg: Config, today: date, labels=None, skip=()) -> 
     return build_rows(ordered_new(meta, snapshot, cfg, today), meta, snapshot, cfg.boards.get("new", 50), labels, skip)
 
 
+def rank_by_category(
+    meta, snapshot, cfg: Config, categories: Collection[str], labels=None, skip=()
+) -> list[tuple[str, list[dict]]]:
+    """Top repos per category (in `categories` order) from existing labels; empty categories are omitted."""
+    labels = labels or {}
+    limit = cfg.boards.get("category", 10)
+    ordered = ordered_total(meta, snapshot, cfg)
+    boards = []
+    for category in categories:
+        names = [n for n in ordered if labels.get(n, {}).get("category") == category]
+        rows = build_rows(names, meta, snapshot, limit, labels, skip)
+        if rows:
+            boards.append((category, rows))
+    return boards
+
+
 def _created_date(meta: dict) -> date | None:
     created = meta.get("created_at")
     if not created:

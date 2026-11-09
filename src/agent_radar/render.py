@@ -4,6 +4,7 @@ from datetime import date, datetime
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from . import rank
+from .classify import CATEGORIES
 from .config import ROOT, Config
 
 TEMPLATE_DIR = ROOT / "templates"
@@ -50,6 +51,8 @@ def render_readme(
     return _env().get_template("readme.md.j2").render(
         total=rank.rank_total(meta, snapshot, cfg, labels, skip),
         new=rank.rank_new(meta, snapshot, cfg, today, labels, skip),
+        categories=rank.rank_by_category(meta, snapshot, cfg, CATEGORIES, labels, skip),
+        category_size=cfg.boards.get("category", 10),
         repo_count=len(snapshot),
         min_stars=cfg.min_stars,
         new_repo_days=cfg.new_repo_days,

@@ -77,3 +77,5 @@ def test_render_readme_with_labels(cfg, today):
     out = render_readme(cfg, meta, snap, today, datetime(2026, 11, 8), labels, skip={"o/c"})
     assert "| 1 | [o/a](https://github.com/o/a) | Coding Agent | 写代码的 Agent | 300 |" in out
     assert "o/b" not in out and "o/c" not in out
+    assert "[分类榜](#分类榜)" in out and "### Coding Agent" in out
+    assert "| 1 | [o/a](https://github.com/o/a) | 写代码的 Agent | 300 |" in out

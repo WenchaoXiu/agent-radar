@@ -65,8 +65,8 @@ def _classify(
     except LLMUnavailable as exc:
         log.error("classification aborted, unclassified repos stay listed: %s", exc)
     log.info(
-        "classified %d repos, %d pending, %d with README",
-        classifier.classified, len(classifier.pending), classifier.readme_fetched,
+        "classified %d repos (%d refreshed), %d pending",
+        classifier.classified, classifier.refreshed, len(classifier.pending),
     )
     llm.log_usage()
 

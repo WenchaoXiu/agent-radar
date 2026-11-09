@@ -36,6 +36,7 @@ boards:
   daily: 50
   weekly: 50
   new: 50
+  category: 10      # 分类榜每个分类显示的数量
 exclude:
   forks: true
   archived: true
@@ -46,5 +47,8 @@ llm:
   classify: { model: "claude-sonnet-5-5", effort: low }
   agent:    { model: "claude-opus-5-5",   effort: high }
   writer:   { model: "claude-opus-5-5",   effort: medium }
-  classify_batch_size: 10
-  readme_chars: 2000
+  classify_batch_size: 1      # 每次调用分类的仓库数
+  classify_workers: 4         # 并发调用数
+  readme_chars: 20000         # README 清理后截取的字符数，0 表示不读 README
+  refresh_days: 30            # 已分类仓库超过这么多天才重新分类
+  refresh_per_run: 20         # 每次运行最多重新分类的过期仓库数，新仓库不受限

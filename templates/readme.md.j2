@@ -6,7 +6,8 @@ AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日�
 
 - [总榜 Top {{ total | length }}](#总榜)
 - [新项目 Top {{ new | length }}](#新项目)
-
+{% if categories %}- [分类榜](#分类榜)
+{% endif %}
 ## 总榜
 
 | # | 仓库 | 分类 | 简介 | Star | 语言 | 最近推送 |
@@ -26,6 +27,20 @@ AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日�
 {% endfor %}
 {%- else -%}
 暂无符合条件的新项目。
+{% endif %}
+{%- if categories %}
+## 分类榜
+
+按 LLM 分类分组，每类按 star 取前 {{ category_size }} 个。
+{% for category, rows in categories %}
+### {{ category }}
+
+| # | 仓库 | 简介 | Star | 语言 | 最近推送 |
+|---:|---|---|---:|---|---|
+{% for r in rows -%}
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
+{% endfor -%}
+{% endfor -%}
 {% endif %}
 ---
 
