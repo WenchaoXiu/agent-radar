@@ -1,5 +1,5 @@
 queries:
-  precise:          # 命中即视为相关，LLM 只负责分类和中文简介
+  precise:          # 作为提示传给 LLM（通常相关），最终以 LLM 判断为准
     - topic:ai-agents
     - topic:ai-agent
     - topic:llm-agent
