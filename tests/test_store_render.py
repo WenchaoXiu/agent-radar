@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 
 import pytest
 
@@ -68,7 +68,9 @@ def test_render_readme(cfg, today):
     assert "| 1 | [o/new](https://github.com/o/new) |  |  | 150 |  |" in out
     assert "## 日增" not in out and "## 周增" not in out
     assert "](https://wenchaoxiu.github.io/agent-radar/)" in out and "<details>" not in out
-    assert "2026-11-08 00:05" in out
+    assert "更新时间：2026-11-08 00:05 UTC（北京时间 2026-11-08 08:05）" in out
+    late = render_readme(cfg, meta, snap, today, datetime(2026, 11, 8, 22, 17, tzinfo=UTC))
+    assert "2026-11-08 22:17 UTC（北京时间 2026-11-09 06:17）" in late
 
 
 def test_render_readme_with_labels(cfg, today):
@@ -140,6 +142,7 @@ def test_render_pages_escapes_untrusted_text(cfg, today):
 def test_render_pages_hero_without_daily_baseline(cfg, today):
     out = render_pages(cfg, GROWTH_META, GROWTH_SNAP, today, datetime(2026, 11, 8))
     assert "今日涨幅第一" not in out and "Star 最多" in out
+    assert "2026-11-08 00:00 UTC · 北京时间 2026-11-08 08:00" in out
     assert 'data-tab="daily"' not in out and '<span class="bar">' not in out
 
 

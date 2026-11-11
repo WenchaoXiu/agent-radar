@@ -1,5 +1,5 @@
 from collections.abc import Collection
-from datetime import date, datetime
+from datetime import UTC, date, datetime, timedelta, timezone
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
@@ -12,6 +12,7 @@ TEMPLATE_DIR = ROOT / "templates"
 DESC_MAX = 90
 PAGES_URL = "https://wenchaoxiu.github.io/agent-radar/"
 VISIBLE_ROWS = 20
+BEIJING = timezone(timedelta(hours=8), "Asia/Shanghai")
 
 # GitHub linguist colors for common languages; others fall back to grey.
 LANG_COLORS = {
@@ -66,6 +67,11 @@ def max_growth(rows: list[dict]) -> int:
     return max((r["growth"] for r in rows if r["growth"] and r["growth"] > 0), default=0)
 
 
+def _utc(dt: datetime) -> datetime:
+    """Naive datetimes are treated as UTC."""
+    return dt.replace(tzinfo=UTC) if dt.tzinfo is None else dt.astimezone(UTC)
+
+
 def build_context(
     cfg: Config,
     meta: dict[str, dict],
@@ -97,7 +103,8 @@ def build_context(
         "repo_count": len(snapshot),
         "min_stars": cfg.min_stars,
         "new_repo_days": cfg.new_repo_days,
-        "generated_at": generated_at.strftime("%Y-%m-%d %H:%M"),
+        "generated_at": _utc(generated_at).strftime("%Y-%m-%d %H:%M"),
+        "generated_at_bj": _utc(generated_at).astimezone(BEIJING).strftime("%Y-%m-%d %H:%M"),
     }
 
 
