@@ -74,11 +74,32 @@ def build_context(
     }
 
 
+def readme_from(ctx: dict) -> str:
+    return _env(autoescape=False).get_template("readme.md.j2").render(ctx)
+
+
+def pages_from(ctx: dict) -> str:
+    return _env(autoescape=True).get_template("pages/index.html.j2").render(ctx)
+
+
+def board_stats(ctx: dict) -> dict:
+    """Row counts per board and how many listed repos still lack a category."""
+    boards = {k: ctx[k] for k in ("total", "daily", "weekly", "new")}
+    listed = {r["repo"] for rows in boards.values() for r in rows}
+    unlabeled = {r["repo"] for rows in boards.values() for r in rows if not r["category"]}
+    return {
+        **{k: len(v) for k, v in boards.items()},
+        "categories": len(ctx["categories"]),
+        "listed_repos": len(listed),
+        "unclassified_listed": len(unlabeled),
+    }
+
+
 def render_readme(*args, **kwargs) -> str:
     """Same arguments as `build_context`."""
-    return _env(autoescape=False).get_template("readme.md.j2").render(build_context(*args, **kwargs))
+    return readme_from(build_context(*args, **kwargs))
 
 
 def render_pages(*args, **kwargs) -> str:
     """Same arguments as `build_context`."""
-    return _env(autoescape=True).get_template("pages/index.html.j2").render(build_context(*args, **kwargs))
+    return pages_from(build_context(*args, **kwargs))

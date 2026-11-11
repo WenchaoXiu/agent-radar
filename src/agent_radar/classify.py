@@ -1,7 +1,6 @@
 import json
 import logging
 import math
-import os
 import re
 import threading
 from collections import Counter
@@ -78,6 +77,8 @@ class Classifier:
         self.labels = labels
         self.now = now
         self.pending: set[str] = set()
+        # Latest failure reason per repo (error type / validation reason only, never LLM content).
+        self.failures: dict[str, str] = {}
         self.classified = 0
         self.refreshed = 0
         self._refresh_left = cfg.llm.refresh_per_run
@@ -86,6 +87,7 @@ class Classifier:
         self._precise = set(cfg.precise_queries)
         self._consecutive_failures = 0
         self._reasons: Counter[str] = Counter()
+        self._last_reason = ""
         self._lock = threading.Lock()
 
     def is_stale(self, label: dict) -> bool:
@@ -153,23 +155,31 @@ class Classifier:
             raise
         except openai.APIStatusError as exc:
             log.warning("classify batch failed: HTTP %s", exc.status_code)
-            return self._fail(names)
+            return self._fail(names, f"http_{exc.status_code}")
         except (ValueError, KeyError, TypeError) as exc:
             log.warning("classify batch unparsable: %s", type(exc).__name__)
             self._save_failure(names, content)
-            return self._fail(names)
+            return self._fail(names, f"unparsable_{type(exc).__name__}")
 
         with self._lock:
             accepted = set()
+            rejected: dict[str, str] = {}
             for item in results:
                 label = self._validate(item, names)
+                name = item.get("repo") if isinstance(item, dict) else None
                 if label is not None:
-                    name = item["repo"]
                     if name in self.labels:
                         self.refreshed += 1
                     self.labels[name] = label
                     accepted.add(name)
+                elif name in names:
+                    rejected[name] = self._last_reason
             missing = [n for n in names if n not in accepted]
+            for n in names:
+                if n in accepted:
+                    self.failures.pop(n, None)
+                else:
+                    self.failures[n] = rejected.get(n, "missing_in_reply")
             if missing:
                 log.warning("classify batch: %d/%d rejected, reasons %s", len(missing), len(names), dict(self._reasons))
             self._reasons.clear()
@@ -178,8 +188,8 @@ class Classifier:
         return missing
 
     def _save_failure(self, names: list[str], content: str | None) -> None:
-        # Local debugging only: never persist LLM output in CI logs/workspace.
-        if os.environ.get("CI") or content is None:
+        # Never logged; in CI the daily workflow uploads this directory as a short-lived artifact.
+        if content is None:
             return
         FAILURE_DIR.mkdir(parents=True, exist_ok=True)
         slug = re.sub(r"[^\w.-]+", "_", names[0])
@@ -187,8 +197,10 @@ class Classifier:
         path.write_text(content, encoding="utf-8")
         log.warning("saved unparsable reply to %s", path)
 
-    def _fail(self, names: list[str]) -> list[str]:
+    def _fail(self, names: list[str], reason: str) -> list[str]:
         with self._lock:
+            for n in names:
+                self.failures[n] = reason
             self._consecutive_failures += 1
             if self._consecutive_failures >= MAX_CONSECUTIVE_BATCH_FAILURES:
                 raise LLMUnavailable(f"{self._consecutive_failures} consecutive batch failures")
@@ -215,6 +227,7 @@ class Classifier:
 
     def _reject(self, reason: str) -> None:
         self._reasons[reason] += 1
+        self._last_reason = reason
 
     def _text(self, item: dict, key: str, required: bool) -> str | None:
         """Validated, stripped text field; None means reject."""

@@ -105,6 +105,7 @@ def test_invalid_items_retried_then_pending(override, reason, caplog):
     assert "o/ok" in c.labels and "o/bad" not in c.labels
     assert c.pending == {"o/bad"}
     assert reason in caplog.text
+    assert c.failures == {"o/bad": reason}
 
 
 def test_irrelevant_needs_only_summary_and_reason():
@@ -130,12 +131,27 @@ def test_unparsable_reply_counts_as_failure(tmp_path, monkeypatch):
     assert len(saved) == 2 and saved[0].read_text() == "sorry, no json"
 
 
-def test_unparsable_reply_not_saved_in_ci(tmp_path, monkeypatch):
+def test_unparsable_reply_saved_in_ci_with_failure_reason(tmp_path, monkeypatch):
     monkeypatch.setenv("CI", "true")
     monkeypatch.setattr("agent_radar.classify.FAILURE_DIR", tmp_path)
     c, _ = make(lambda p: reply("nope"), ["o/a"])
     c.classify(["o/a"])
-    assert list(tmp_path.iterdir()) == []
+    assert len(list(tmp_path.iterdir())) == 2
+    assert c.failures == {"o/a": "unparsable_JSONDecodeError"}
+
+
+def test_missing_repo_in_reply_and_recovery_clear_failures():
+    calls = []
+
+    def answer(payload):
+        calls.append(payload)
+        if len(calls) == 1:  # first attempt omits o/b
+            return reply(json.dumps({"results": [item("o/a")]}))
+        return reply(json.dumps({"results": [item(p["repo"]) for p in payload]}))
+
+    c, _ = make(answer, ["o/a", "o/b"])
+    c.classify(["o/a", "o/b"])
+    assert "o/b" in c.labels and c.failures == {} and c.pending == set()
 
 
 def test_consecutive_failures_abort():
