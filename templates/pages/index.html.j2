@@ -4,7 +4,7 @@
 
 {%- macro card(r, mx, growth_label="日增", show_category=true, date_label="推送于", date_key="pushed_at") -%}
 {%- set owner, name = r.repo.split("/", 1) -%}
-<li class="card" data-cat="{{ r.category }}" data-text="{{ (r.repo ~ ' ' ~ r.summary ~ ' ' ~ r.category) | lower }}">
+<li class="card{% if r.summary_zh or r.key_features %} has-info{% endif %}" data-cat="{{ r.category }}" data-text="{{ (r.repo ~ ' ' ~ r.summary ~ ' ' ~ r.category) | lower }}">
   <span class="rank{% if r.rank <= 3 %} top top{{ r.rank }}{% endif %}">{{ r.rank }}</span>
   <div class="body">
     <div class="title">
@@ -133,6 +133,8 @@ main { padding:24px 0 64px; }
 .list { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
 .card { display:grid; grid-template-columns:36px minmax(0,1fr) 128px; gap:14px; align-items:start; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow); transition:border-color .15s,box-shadow .15s,transform .15s; }
 .card:hover { border-color:var(--hover); box-shadow:var(--shadow-hover); }
+.js .card.has-info { cursor:pointer; }
+.info-body { cursor:auto; }
 .card[hidden] { display:none; }
 .rank { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; font:600 13px var(--mono); color:var(--muted); background:var(--bg); border:1px solid var(--border); }
 .rank.top { color:#fff; border:0; }
@@ -335,6 +337,15 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
     });
   });
   input.addEventListener("input", function () { state.q = input.value.trim().toLowerCase(); apply(); });
+  // Clicking anywhere on a card toggles its details, except links, the summary toggle,
+  // the opened details text, and when the click ends a text selection.
+  document.addEventListener("click", function (e) {
+    var card = e.target.closest(".card.has-info");
+    if (!card || e.target.closest("a, summary, .info-body")) return;
+    if (String(window.getSelection())) return;
+    var info = card.querySelector("details.info");
+    info.open = !info.open;
+  });
   document.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-more]");
     if (!btn) return;

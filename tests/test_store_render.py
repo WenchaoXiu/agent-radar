@@ -134,6 +134,7 @@ def test_render_pages_escapes_untrusted_text(cfg, today):
     assert 'data-text="o/b 一句话 coding agent"' in out
     assert '<i style="width:100.0%">' in out and '<i style="width:20.0%">' in out
     assert "var VISIBLE = 20;" in out
+    assert 'class="card has-info"' in out and 'class="card"' in out  # only cards with details are clickable
 
 
 def test_render_pages_hero_without_daily_baseline(cfg, today):

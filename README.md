@@ -4,7 +4,7 @@ AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日�
 
 **[在网页中浏览 →](https://wenchaoxiu.github.io/agent-radar/)**（支持分类筛选、搜索和项目详情）
 
-更新时间：2026-11-11 08:35 UTC · 收录仓库：13,176 个（star ≥ 100，不含 fork 和已归档仓库）
+更新时间：2026-11-11 08:42 UTC · 收录仓库：13,176 个（star ≥ 100，不含 fork 和已归档仓库）
 
 - [总榜 Top 100](#总榜)
 - [日增 Top 50](#日增)

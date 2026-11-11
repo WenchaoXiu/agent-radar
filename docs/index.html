@@ -84,6 +84,8 @@ main { padding:24px 0 64px; }
 .list { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
 .card { display:grid; grid-template-columns:36px minmax(0,1fr) 128px; gap:14px; align-items:start; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow); transition:border-color .15s,box-shadow .15s,transform .15s; }
 .card:hover { border-color:var(--hover); box-shadow:var(--shadow-hover); }
+.js .card.has-info { cursor:pointer; }
+.info-body { cursor:auto; }
 .card[hidden] { display:none; }
 .rank { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; font:600 13px var(--mono); color:var(--muted); background:var(--bg); border:1px solid var(--border); }
 .rank.top { color:#fff; border:0; }
@@ -140,7 +142,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
 <body>
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow"><i class="pulse"></i>每日自动更新 · 2026-11-11 08:35 UTC</span>
+    <span class="eyebrow"><i class="pulse"></i>每日自动更新 · 2026-11-11 08:42 UTC</span>
     <h1>Agent <span>Radar</span></h1>
     <p class="lead">AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单</p>
     <div class="stats">
@@ -171,7 +173,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
 <section class="panel" id="panel-total" data-panel="total">
   <div class="panel-head"><h2>总榜</h2><span class="note">按当前 star 排序 · 日增对比 2026-11-10 的快照</span><span class="count" data-count></span></div>
   <ol class="list" id="list-total" data-list>
-<li class="card" data-cat="MCP Server/工具" data-text="morluto/rea 通过 mcp 为 ai agent 提供逆向工程能力的工具链 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="morluto/rea 通过 mcp 为 ai agent 提供逆向工程能力的工具链 mcp server/工具">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -190,7 +192,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="obra/superpowers 为 coding agent 提供的完整软件开发方法论技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="obra/superpowers 为 coding agent 提供的完整软件开发方法论技能包 skills/prompts">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -209,7 +211,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="affaan-m/ecc 为 coding agent 提供工程化系统的运行时增强工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="affaan-m/ecc 为 coding agent 提供工程化系统的运行时增强工具 harness/运行时">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -228,7 +230,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="deepseek-ai/deepseek-harness 基于插件架构的 agent 运行环境 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="deepseek-ai/deepseek-harness 基于插件架构的 agent 运行环境 harness/运行时">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -247,7 +249,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:26.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="nousresearch/hermes-agent 自改进 ai agent 框架，内置学习循环和技能系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="nousresearch/hermes-agent 自改进 ai agent 框架，内置学习循环和技能系统 agent 框架">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -266,7 +268,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:12.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="n8n-io/n8n 可视化工作流自动化平台，支持构建 ai agent 和多步骤工作流 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="n8n-io/n8n 可视化工作流自动化平台，支持构建 ai agent 和多步骤工作流 agent 框架">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -285,7 +287,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="firecrawl/firecrawl 为 ai agent 提供网页数据的搜索、抓取和交互 api agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="firecrawl/firecrawl 为 ai agent 提供网页数据的搜索、抓取和交互 api agent 应用">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -304,7 +306,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:13.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="anthropics/skills anthropic 官方的 claude agent 技能包仓库 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="anthropics/skills anthropic 官方的 claude agent 技能包仓库 skills/prompts">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -323,7 +325,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:41.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="dietrichgebert/ponytail 让 ai agent 像资深开发者一样写最少必要代码的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="dietrichgebert/ponytail 让 ai agent 像资深开发者一样写最少必要代码的技能包 skills/prompts">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -342,7 +344,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:21.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="significant-gravitas/autogpt 多智能体协调平台，一句话分配工作给专家 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="significant-gravitas/autogpt 多智能体协调平台，一句话分配工作给专家 agent 应用">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -361,7 +363,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="langgenius/dify 可视化构建 agent 工作流和 rag 的开发平台 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="langgenius/dify 可视化构建 agent 工作流和 rag 的开发平台 agent 框架">
   <span class="rank">11</span>
   <div class="body">
     <div class="title">
@@ -380,7 +382,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="open-webui/open-webui 可自托管的 ai 聊天界面和 agent 运行平台 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="open-webui/open-webui 可自托管的 ai 聊天界面和 agent 运行平台 agent 应用">
   <span class="rank">12</span>
   <div class="body">
     <div class="title">
@@ -399,7 +401,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="langflow-ai/langflow 可视化构建和部署 ai agent 与工作流的平台 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="langflow-ai/langflow 可视化构建和部署 ai agent 与工作流的平台 agent 框架">
   <span class="rank">13</span>
   <div class="body">
     <div class="title">
@@ -418,7 +420,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="farion1231/cc-switch 多 agent 编程工具的统一配置管理器 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="farion1231/cc-switch 多 agent 编程工具的统一配置管理器 harness/运行时">
   <span class="rank">14</span>
   <div class="body">
     <div class="title">
@@ -437,7 +439,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:9.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="langchain-ai/langchain 构建 agent 和 llm 应用的框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="langchain-ai/langchain 构建 agent 和 llm 应用的框架 agent 框架">
   <span class="rank">15</span>
   <div class="body">
     <div class="title">
@@ -456,7 +458,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="nextlevelbuilder/ui-ux-pro-max-skill 为 ai 编程助手提供 ui/ux 设计智能的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="nextlevelbuilder/ui-ux-pro-max-skill 为 ai 编程助手提供 ui/ux 设计智能的技能包 skills/prompts">
   <span class="rank">16</span>
   <div class="body">
     <div class="title">
@@ -475,7 +477,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:14.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="graphify-labs/graphify 将代码库转为可查询知识图谱的 agent 技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="graphify-labs/graphify 将代码库转为可查询知识图谱的 agent 技能包 skills/prompts">
   <span class="rank">17</span>
   <div class="body">
     <div class="title">
@@ -494,7 +496,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:21.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="shubhamsaboo/awesome-llm-apps 100多个开源ai agent、技能和rag应用模板合集 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="shubhamsaboo/awesome-llm-apps 100多个开源ai agent、技能和rag应用模板合集 教程/awesome">
   <span class="rank">18</span>
   <div class="body">
     <div class="title">
@@ -513,7 +515,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="tauricresearch/tradingagents 模拟真实交易公司的多智能体金融交易框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="tauricresearch/tradingagents 模拟真实交易公司的多智能体金融交易框架 agent 框架">
   <span class="rank">19</span>
   <div class="body">
     <div class="title">
@@ -532,7 +534,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="stablyai/orca 多 coding agent 编排与运行环境 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="stablyai/orca 多 coding agent 编排与运行环境 harness/运行时">
   <span class="rank">20</span>
   <div class="body">
     <div class="title">
@@ -551,7 +553,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:35.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="earendil-works/pi 可扩展的编程助手命令行工具 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="earendil-works/pi 可扩展的编程助手命令行工具 coding agent">
   <span class="rank">21</span>
   <div class="body">
     <div class="title">
@@ -570,7 +572,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="browser-use/browser-use 让 ai agent 像人类一样操作浏览器的开源 python 库 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="browser-use/browser-use 让 ai agent 像人类一样操作浏览器的开源 python 库 agent 框架">
   <span class="rank">22</span>
   <div class="body">
     <div class="title">
@@ -589,7 +591,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="juliusbrussee/caveman 让 ai agent 用简化语言回复和压缩输入的技能包和代理工具 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="juliusbrussee/caveman 让 ai agent 用简化语言回复和压缩输入的技能包和代理工具 skills/prompts">
   <span class="rank">23</span>
   <div class="body">
     <div class="title">
@@ -608,7 +610,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:7.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="thedotmack/claude-mem 为 ai agent 提供跨会话持久记忆的本地工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="thedotmack/claude-mem 为 ai agent 提供跨会话持久记忆的本地工具 harness/运行时">
   <span class="rank">24</span>
   <div class="body">
     <div class="title">
@@ -627,7 +629,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:14.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="addyosmani/agent-skills 面向 ai 编程助手的生产级工程技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="addyosmani/agent-skills 面向 ai 编程助手的生产级工程技能包 skills/prompts">
   <span class="rank">25</span>
   <div class="body">
     <div class="title">
@@ -646,7 +648,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:22.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="leonxlnx/taste-skill 给编程 agent 提供设计品味的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="leonxlnx/taste-skill 给编程 agent 提供设计品味的技能包 skills/prompts">
   <span class="rank">26</span>
   <div class="body">
     <div class="title">
@@ -665,7 +667,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:15.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="paperclipai/paperclip 多 agent 编排管理平台，像管理公司一样运营 ai agent 团队 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="paperclipai/paperclip 多 agent 编排管理平台，像管理公司一样运营 ai agent 团队 harness/运行时">
   <span class="rank">27</span>
   <div class="body">
     <div class="title">
@@ -684,7 +686,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="panniantong/agent-reach 给 cli agent 提供互联网数据采集能力的工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="panniantong/agent-reach 给 cli agent 提供互联网数据采集能力的工具 harness/运行时">
   <span class="rank">28</span>
   <div class="body">
     <div class="title">
@@ -703,7 +705,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:8.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="google-gemini/gemini-cli google 官方的终端编程助手，专为企业代码辅助场景设计 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="google-gemini/gemini-cli google 官方的终端编程助手，专为企业代码辅助场景设计 coding agent">
   <span class="rank">29</span>
   <div class="body">
     <div class="title">
@@ -722,7 +724,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="pbakaus/impeccable 为编码 agent 提供设计指令词汇和质量检测 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="pbakaus/impeccable 为编码 agent 提供设计指令词汇和质量检测 skills/prompts">
   <span class="rank">30</span>
   <div class="body">
     <div class="title">
@@ -741,7 +743,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:23.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="nexu-io/open-design 协作式 ai 设计工作区，用 agent 生成原型、演示文稿、视频 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="nexu-io/open-design 协作式 ai 设计工作区，用 agent 生成原型、演示文稿、视频 agent 应用">
   <span class="rank">31</span>
   <div class="body">
     <div class="title">
@@ -760,7 +762,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="d4vinci/scrapling 支持 mcp 协议的 python 网页抓取框架 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="d4vinci/scrapling 支持 mcp 协议的 python 网页抓取框架 mcp server/工具">
   <span class="rank">32</span>
   <div class="body">
     <div class="title">
@@ -779,7 +781,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="karpathy/autoresearch 让 ai agent 自主修改代码优化 llm 训练 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="karpathy/autoresearch 让 ai agent 自主修改代码优化 llm 训练 agent 应用">
   <span class="rank">33</span>
   <div class="body">
     <div class="title">
@@ -798,7 +800,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="punkpeye/awesome-mcp-servers mcp server 精选列表和目录 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="punkpeye/awesome-mcp-servers mcp server 精选列表和目录 教程/awesome">
   <span class="rank">34</span>
   <div class="body">
     <div class="title">
@@ -817,7 +819,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="tt-a1i/archify 为 coding agent 提供的可视化技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="tt-a1i/archify 为 coding agent 提供的可视化技能包 skills/prompts">
   <span class="rank">35</span>
   <div class="body">
     <div class="title">
@@ -836,7 +838,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:9.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="infiniflow/ragflow 融合 rag 和 agent 能力的上下文引擎 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="infiniflow/ragflow 融合 rag 和 agent 能力的上下文引擎 harness/运行时">
   <span class="rank">36</span>
   <div class="body">
     <div class="title">
@@ -855,7 +857,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="openhands/openhands 自托管的 coding agent 控制中心与自动化平台 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="openhands/openhands 自托管的 coding agent 控制中心与自动化平台 harness/运行时">
   <span class="rank">37</span>
   <div class="body">
     <div class="title">
@@ -874,7 +876,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="egonex-ai/understand-anything 将代码库转换为可交互知识图谱的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="egonex-ai/understand-anything 将代码库转换为可交互知识图谱的技能包 skills/prompts">
   <span class="rank">38</span>
   <div class="body">
     <div class="title">
@@ -893,7 +895,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="koala73/worldmonitor 全球情报监控仪表板的 mcp server 和 api mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="koala73/worldmonitor 全球情报监控仪表板的 mcp server 和 api mcp server/工具">
   <span class="rank">39</span>
   <div class="body">
     <div class="title">
@@ -912,7 +914,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="unclecode/crawl4ai 为 ai agent 提供网页抓取和数据提取的托管 api 与开源爬虫 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="unclecode/crawl4ai 为 ai agent 提供网页抓取和数据提取的托管 api 与开源爬虫 mcp server/工具">
   <span class="rank">40</span>
   <div class="body">
     <div class="title">
@@ -931,7 +933,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="datawhalechina/hello-agents 从零开始构建 ai agent 的系统性中文教程 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="datawhalechina/hello-agents 从零开始构建 ai agent 的系统性中文教程 教程/awesome">
   <span class="rank">41</span>
   <div class="body">
     <div class="title">
@@ -950,7 +952,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="cheaper-inference/omniroute 统一 ai 网关，聚合 382 个模型提供商到一个端点 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="cheaper-inference/omniroute 统一 ai 网关，聚合 382 个模型提供商到一个端点 harness/运行时">
   <span class="rank">42</span>
   <div class="body">
     <div class="title">
@@ -969,7 +971,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="rtk-ai/rtk 压缩 ai agent 命令输出和 api 流量的代理工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="rtk-ai/rtk 压缩 ai agent 命令输出和 api 流量的代理工具 harness/运行时">
   <span class="rank">43</span>
   <div class="body">
     <div class="title">
@@ -988,7 +990,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="bytedance/deer-flow 长时程超级 agent 运行环境，编排子 agent、记忆、沙箱和技能执行复杂任务 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="bytedance/deer-flow 长时程超级 agent 运行环境，编排子 agent、记忆、沙箱和技能执行复杂任务 harness/运行时">
   <span class="rank">44</span>
   <div class="body">
     <div class="title">
@@ -1007,7 +1009,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="lobehub/lobehub 团队协作型 agent 运行平台 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="lobehub/lobehub 团队协作型 agent 运行平台 harness/运行时">
   <span class="rank">45</span>
   <div class="body">
     <div class="title">
@@ -1026,7 +1028,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:9.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="heygen-com/hyperframes 为 ai agent 提供视频制作技能包的 html 转视频框架 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="heygen-com/hyperframes 为 ai agent 提供视频制作技能包的 html 转视频框架 skills/prompts">
   <span class="rank">46</span>
   <div class="body">
     <div class="title">
@@ -1045,7 +1047,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="career-ops-hq/career-ops ai 求职助手，评估职位匹配度并生成简历 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="career-ops-hq/career-ops ai 求职助手，评估职位匹配度并生成简历 agent 应用">
   <span class="rank">47</span>
   <div class="body">
     <div class="title">
@@ -1064,7 +1066,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:8.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="ruvnet/ruflo agent 运行环境，为 claude code 和 codex 提供编排、记忆、沙箱和多 agent 协作能力 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="ruvnet/ruflo agent 运行环境，为 claude code 和 codex 提供编排、记忆、沙箱和多 agent 协作能力 harness/运行时">
   <span class="rank">48</span>
   <div class="body">
     <div class="title">
@@ -1083,7 +1085,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="shareai-lab/learn-claude-code 从零构建 agent 运行时的 17 课渐进式教程 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="shareai-lab/learn-claude-code 从零构建 agent 运行时的 17 课渐进式教程 教程/awesome">
   <span class="rank">49</span>
   <div class="body">
     <div class="title">
@@ -1102,7 +1104,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="dair-ai/prompt-engineering-guide 提示工程、rag 和 ai agents 的综合学习指南 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="dair-ai/prompt-engineering-guide 提示工程、rag 和 ai agents 的综合学习指南 教程/awesome">
   <span class="rank">50</span>
   <div class="body">
     <div class="title">
@@ -1121,7 +1123,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="openmontageinc/openmontage 将 ai 编程助手变为完整视频制作系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="openmontageinc/openmontage 将 ai 编程助手变为完整视频制作系统 agent 框架">
   <span class="rank">51</span>
   <div class="body">
     <div class="title">
@@ -1140,7 +1142,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="microsoft/ai-agents-for-beginners 微软出品的 ai agent 入门课程，共 18 课 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="microsoft/ai-agents-for-beginners 微软出品的 ai agent 入门课程，共 18 课 教程/awesome">
   <span class="rank">52</span>
   <div class="body">
     <div class="title">
@@ -1159,7 +1161,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="headroomlabs-ai/headroom 本地压缩 agent 上下文的工具和 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="headroomlabs-ai/headroom 本地压缩 agent 上下文的工具和 mcp server mcp server/工具">
   <span class="rank">53</span>
   <div class="body">
     <div class="title">
@@ -1178,7 +1180,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="composiohq/awesome-claude-skills claude skills 精选列表与技能包合集 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="composiohq/awesome-claude-skills claude skills 精选列表与技能包合集 skills/prompts">
   <span class="rank">54</span>
   <div class="body">
     <div class="title">
@@ -1197,7 +1199,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="rohitg00/ai-engineering-from-scratch 从零实现 ai 工程的完整课程体系 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="rohitg00/ai-engineering-from-scratch 从零实现 ai 工程的完整课程体系 教程/awesome">
   <span class="rank">55</span>
   <div class="body">
     <div class="title">
@@ -1216,7 +1218,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="hugohe3/ppt-master 让 ai agent 从文档生成原生可编辑 powerpoint 的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="hugohe3/ppt-master 让 ai agent 从文档生成原生可编辑 powerpoint 的技能包 skills/prompts">
   <span class="rank">56</span>
   <div class="body">
     <div class="title">
@@ -1235,7 +1237,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:12.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="usestrix/strix 自主 ai 渗透测试工具，自动发现和验证应用漏洞 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="usestrix/strix 自主 ai 渗透测试工具，自动发现和验证应用漏洞 agent 应用">
   <span class="rank">57</span>
   <div class="body">
     <div class="title">
@@ -1254,7 +1256,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="foundationagents/metagpt 多智能体协作框架，模拟软件公司角色分工 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="foundationagents/metagpt 多智能体协作框架，模拟软件公司角色分工 agent 框架">
   <span class="rank">58</span>
   <div class="body">
     <div class="title">
@@ -1273,7 +1275,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="asgeirtj/system_prompts_leaks ai产品系统提示词泄露合集 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="asgeirtj/system_prompts_leaks ai产品系统提示词泄露合集 skills/prompts">
   <span class="rank">59</span>
   <div class="body">
     <div class="title">
@@ -1292,7 +1294,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="ai-job-search-dev/ai-job-search 基于 claude code 的求职自动化框架 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="ai-job-search-dev/ai-job-search 基于 claude code 的求职自动化框架 agent 应用">
   <span class="rank">60</span>
   <div class="body">
     <div class="title">
@@ -1311,7 +1313,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:7.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="code-yeongyu/oh-my-openagent 命令行 ai 编程助手，支持多模型协作和图编排 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="code-yeongyu/oh-my-openagent 命令行 ai 编程助手，支持多模型协作和图编排 coding agent">
   <span class="rank">61</span>
   <div class="body">
     <div class="title">
@@ -1330,7 +1332,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="zhulinsen/daily_stock_analysis 多市场股票ai分析系统，每日推送决策报告 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="zhulinsen/daily_stock_analysis 多市场股票ai分析系统，每日推送决策报告 agent 应用">
   <span class="rank">62</span>
   <div class="body">
     <div class="title">
@@ -1349,7 +1351,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:14.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="cloudflare/security-audit-skill 给 coding agent 用的多阶段安全审计技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="cloudflare/security-audit-skill 给 coding agent 用的多阶段安全审计技能包 skills/prompts">
   <span class="rank">63</span>
   <div class="body">
     <div class="title">
@@ -1368,7 +1370,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:42.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="ebony-vinyl/dsh-our-free-model deepseek harness 的免费模型接入插件 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="ebony-vinyl/dsh-our-free-model deepseek harness 的免费模型接入插件 harness/运行时">
   <span class="rank">64</span>
   <div class="body">
     <div class="title">
@@ -1387,7 +1389,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:45.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="shanraisshan/claude-code-best-practice claude code最佳实践和agent工作流指南 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="shanraisshan/claude-code-best-practice claude code最佳实践和agent工作流指南 教程/awesome">
   <span class="rank">65</span>
   <div class="body">
     <div class="title">
@@ -1406,7 +1408,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="openinterpreter/openinterpreter 为低成本模型优化的编程助手 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="openinterpreter/openinterpreter 为低成本模型优化的编程助手 coding agent">
   <span class="rank">66</span>
   <div class="body">
     <div class="title">
@@ -1425,7 +1427,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="mem0ai/mem0 ai 智能体的记忆层基础设施 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="mem0ai/mem0 ai 智能体的记忆层基础设施 harness/运行时">
   <span class="rank">67</span>
   <div class="body">
     <div class="title">
@@ -1444,7 +1446,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="mintplex-labs/anything-llm 本地优先的 ai agent 运行环境与文档对话平台 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="mintplex-labs/anything-llm 本地优先的 ai agent 运行环境与文档对话平台 harness/运行时">
   <span class="rank">68</span>
   <div class="body">
     <div class="title">
@@ -1463,7 +1465,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="blader/humanizer 移除 ai 写作痕迹的 agent 技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="blader/humanizer 移除 ai 写作痕迹的 agent 技能包 skills/prompts">
   <span class="rank">69</span>
   <div class="body">
     <div class="title">
@@ -1482,7 +1484,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:15.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="mvanhorn/last30days-skill 跨平台深度研究工具，聚合社交媒体信号供 ai agent 使用 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="mvanhorn/last30days-skill 跨平台深度研究工具，聚合社交媒体信号供 ai agent 使用 skills/prompts">
   <span class="rank">70</span>
   <div class="body">
     <div class="title">
@@ -1501,7 +1503,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="cathrynlavery/diagram-design 给 agent 用的图表绘制技能包，45 种图表类型 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="cathrynlavery/diagram-design 给 agent 用的图表绘制技能包，45 种图表类型 skills/prompts">
   <span class="rank">71</span>
   <div class="body">
     <div class="title">
@@ -1520,7 +1522,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:8.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="upstash/context7 为编程 agent 提供最新库文档的 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="upstash/context7 为编程 agent 提供最新库文档的 mcp server mcp server/工具">
   <span class="rank">72</span>
   <div class="body">
     <div class="title">
@@ -1539,7 +1541,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="sansan0/trendradar ai 驱动的多平台热点聚合与舆情监控工具 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="sansan0/trendradar ai 驱动的多平台热点聚合与舆情监控工具 agent 应用">
   <span class="rank">73</span>
   <div class="body">
     <div class="title">
@@ -1558,7 +1560,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="microsoft/autogen 用于构建多 agent ai 应用的编程框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="microsoft/autogen 用于构建多 agent ai 应用的编程框架 agent 框架">
   <span class="rank">74</span>
   <div class="body">
     <div class="title">
@@ -1577,7 +1579,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="ayghri/i-have-adhd 让编程助手先给结论、不废话的 adhd 友好输出技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="ayghri/i-have-adhd 让编程助手先给结论、不废话的 adhd 友好输出技能包 skills/prompts">
   <span class="rank">75</span>
   <div class="body">
     <div class="title">
@@ -1596,7 +1598,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="crewaiinc/crewai 用于构建多 agent 协作和工作流的 python 框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="crewaiinc/crewai 用于构建多 agent 协作和工作流的 python 框架 agent 框架">
   <span class="rank">76</span>
   <div class="body">
     <div class="title">
@@ -1615,7 +1617,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="mempalace/mempalace 本地优先的 ai 对话记忆系统，支持语义检索 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="mempalace/mempalace 本地优先的 ai 对话记忆系统，支持语义检索 harness/运行时">
   <span class="rank">77</span>
   <div class="body">
     <div class="title">
@@ -1634,7 +1636,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="vectorize-io/hindsight 让 ai 智能体学习进化的记忆系统 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="vectorize-io/hindsight 让 ai 智能体学习进化的记忆系统 harness/运行时">
   <span class="rank">78</span>
   <div class="body">
     <div class="title">
@@ -1653,7 +1655,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="coreyhaines31/marketingskills 给 ai agent 用的营销技能包合集 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="coreyhaines31/marketingskills 给 ai agent 用的营销技能包合集 skills/prompts">
   <span class="rank">79</span>
   <div class="body">
     <div class="title">
@@ -1672,7 +1674,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="hkuds/deeptutor agent 驱动的个性化学习工作空间 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="hkuds/deeptutor agent 驱动的个性化学习工作空间 agent 应用">
   <span class="rank">80</span>
   <div class="body">
     <div class="title">
@@ -1691,7 +1693,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:11.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="hesreallyhim/awesome-claude-code claude code 编程助手的精选资源列表 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="hesreallyhim/awesome-claude-code claude code 编程助手的精选资源列表 教程/awesome">
   <span class="rank">81</span>
   <div class="body">
     <div class="title">
@@ -1710,7 +1712,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="bojieli/ai-agent-book ai agent 设计原理与工程实践完整教程 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="bojieli/ai-agent-book ai agent 设计原理与工程实践完整教程 教程/awesome">
   <span class="rank">82</span>
   <div class="body">
     <div class="title">
@@ -1729,7 +1731,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="k-dense-ai/scientific-agent-skills 面向科研场景的 agent 技能库 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="k-dense-ai/scientific-agent-skills 面向科研场景的 agent 技能库 skills/prompts">
   <span class="rank">83</span>
   <div class="body">
     <div class="title">
@@ -1748,7 +1750,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="aaif-goose/goose 本地运行的通用 ai agent，提供桌面应用、cli 和 api agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="aaif-goose/goose 本地运行的通用 ai agent，提供桌面应用、cli 和 api agent 应用">
   <span class="rank">84</span>
   <div class="body">
     <div class="title">
@@ -1767,7 +1769,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="imbad0202/academic-research-skills 给 claude code 用的学术研究技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="imbad0202/academic-research-skills 给 claude code 用的学术研究技能包 skills/prompts">
   <span class="rank">85</span>
   <div class="body">
     <div class="title">
@@ -1786,7 +1788,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="multica-ai/multica 协作式 ai agent 工作空间与运行时管理平台 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="multica-ai/multica 协作式 ai agent 工作空间与运行时管理平台 harness/运行时">
   <span class="rank">86</span>
   <div class="body">
     <div class="title">
@@ -1805,7 +1807,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="chromedevtools/chrome-devtools-mcp 让 ai 编程助手控制和调试 chrome 浏览器的 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="chromedevtools/chrome-devtools-mcp 让 ai 编程助手控制和调试 chrome 浏览器的 mcp server mcp server/工具">
   <span class="rank">87</span>
   <div class="body">
     <div class="title">
@@ -1824,7 +1826,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="voltagent/awesome-openclaw-skills openclaw ai 助手的技能精选列表 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="voltagent/awesome-openclaw-skills openclaw ai 助手的技能精选列表 教程/awesome">
   <span class="rank">88</span>
   <div class="body">
     <div class="title">
@@ -1843,7 +1845,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="cherryhq/cherry-studio 集成多模型对话、agent 工作、知识库和自动化的桌面 ai 工作站 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="cherryhq/cherry-studio 集成多模型对话、agent 工作、知识库和自动化的桌面 ai 工作站 agent 应用">
   <span class="rank">89</span>
   <div class="body">
     <div class="title">
@@ -1862,7 +1864,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="run-llama/llama_index 用于构建 rag 和 agent 应用的数据框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="run-llama/llama_index 用于构建 rag 和 agent 应用的数据框架 agent 框架">
   <span class="rank">90</span>
   <div class="body">
     <div class="title">
@@ -1881,7 +1883,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="elder-plinius/cl4r1t4s 多个ai产品的系统提示词和工具合集 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="elder-plinius/cl4r1t4s 多个ai产品的系统提示词和工具合集 skills/prompts">
   <span class="rank">91</span>
   <div class="body">
     <div class="title">
@@ -1900,7 +1902,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:7.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="kepano/obsidian-skills 为 obsidian 提供的 agent 技能包，支持 markdown、bases、canvas 等格式操作 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="kepano/obsidian-skills 为 obsidian 提供的 agent 技能包，支持 markdown、bases、canvas 等格式操作 skills/prompts">
   <span class="rank">92</span>
   <div class="body">
     <div class="title">
@@ -1919,7 +1921,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="mudler/localai 本地运行任意 ai 模型的开源推理引擎 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="mudler/localai 本地运行任意 ai 模型的开源推理引擎 harness/运行时">
   <span class="rank">93</span>
   <div class="body">
     <div class="title">
@@ -1938,7 +1940,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="herdrdev/herdr 为 coding agent 提供持久化运行环境的终端复用器 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="herdrdev/herdr 为 coding agent 提供持久化运行环境的终端复用器 harness/运行时">
   <span class="rank">94</span>
   <div class="body">
     <div class="title">
@@ -1957,7 +1959,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:8.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="hkuds/nanobot 轻量级自托管个人 ai agent 框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="hkuds/nanobot 轻量级自托管个人 ai agent 框架 agent 框架">
   <span class="rank">95</span>
   <div class="body">
     <div class="title">
@@ -1976,7 +1978,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="alibaba/open-code-review ai 驱动的代码审查 cli 工具 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="alibaba/open-code-review ai 驱动的代码审查 cli 工具 coding agent">
   <span class="rank">96</span>
   <div class="body">
     <div class="title">
@@ -1995,7 +1997,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="sickn33/agentic-awesome-skills 2926+ 条可安装的 ai agent 技能库 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="sickn33/agentic-awesome-skills 2926+ 条可安装的 ai agent 技能库 skills/prompts">
   <span class="rank">97</span>
   <div class="body">
     <div class="title">
@@ -2014,7 +2016,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="vercel-labs/agent-browser 给 ai agent 用的浏览器自动化 cli 工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="vercel-labs/agent-browser 给 ai agent 用的浏览器自动化 cli 工具 harness/运行时">
   <span class="rank">98</span>
   <div class="body">
     <div class="title">
@@ -2033,7 +2035,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:24.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="deusdata/codebase-memory-mcp 本地代码知识图谱 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="deusdata/codebase-memory-mcp 本地代码知识图谱 mcp server mcp server/工具">
   <span class="rank">99</span>
   <div class="body">
     <div class="title">
@@ -2052,7 +2054,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="jeecgboot/jeecgboot java 低代码平台集成 ai skills 自然语言编程和 mcp agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="jeecgboot/jeecgboot java 低代码平台集成 ai skills 自然语言编程和 mcp agent 框架">
   <span class="rank">100</span>
   <div class="body">
     <div class="title">
@@ -2078,7 +2080,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
 <section class="panel" id="panel-daily" data-panel="daily">
   <div class="panel-head"><h2>日增</h2><span class="note">对比 2026-11-10 的快照 · 首次入池的仓库不参与排名</span><span class="count" data-count></span></div>
   <ol class="list" id="list-daily" data-list>
-<li class="card" data-cat="MCP Server/工具" data-text="morluto/rea 通过 mcp 为 ai agent 提供逆向工程能力的工具链 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="morluto/rea 通过 mcp 为 ai agent 提供逆向工程能力的工具链 mcp server/工具">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -2097,7 +2099,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="ebony-vinyl/dsh-our-free-model deepseek harness 的免费模型接入插件 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="ebony-vinyl/dsh-our-free-model deepseek harness 的免费模型接入插件 harness/运行时">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -2116,7 +2118,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:45.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="cloudflare/security-audit-skill 给 coding agent 用的多阶段安全审计技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="cloudflare/security-audit-skill 给 coding agent 用的多阶段安全审计技能包 skills/prompts">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -2135,7 +2137,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:42.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="anthropics/skills anthropic 官方的 claude agent 技能包仓库 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="anthropics/skills anthropic 官方的 claude agent 技能包仓库 skills/prompts">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -2154,7 +2156,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:41.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="ccch1mneyyy/dsh-go deepseek harness 的 android 手机客户端 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="ccch1mneyyy/dsh-go deepseek harness 的 android 手机客户端 harness/运行时">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -2173,7 +2175,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:35.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="stablyai/orca 多 coding agent 编排与运行环境 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="stablyai/orca 多 coding agent 编排与运行环境 harness/运行时">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -2192,7 +2194,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:35.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="juneyaooo/rea-video 逐镜头分析视频的 ai 工具 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="juneyaooo/rea-video 逐镜头分析视频的 ai 工具 mcp server/工具">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -2226,7 +2228,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:26.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="deepseek-ai/deepseek-harness 基于插件架构的 agent 运行环境 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="deepseek-ai/deepseek-harness 基于插件架构的 agent 运行环境 harness/运行时">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -2260,7 +2262,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:25.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="yetone/magpie 统一管理所有 coding agent 的模型配置和账号切换 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="yetone/magpie 统一管理所有 coding agent 的模型配置和账号切换 harness/运行时">
   <span class="rank">11</span>
   <div class="body">
     <div class="title">
@@ -2279,7 +2281,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:25.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="vercel-labs/agent-browser 给 ai agent 用的浏览器自动化 cli 工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="vercel-labs/agent-browser 给 ai agent 用的浏览器自动化 cli 工具 harness/运行时">
   <span class="rank">12</span>
   <div class="body">
     <div class="title">
@@ -2298,7 +2300,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:24.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="pbakaus/impeccable 为编码 agent 提供设计指令词汇和质量检测 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="pbakaus/impeccable 为编码 agent 提供设计指令词汇和质量检测 skills/prompts">
   <span class="rank">13</span>
   <div class="body">
     <div class="title">
@@ -2317,7 +2319,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:23.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="addyosmani/agent-skills 面向 ai 编程助手的生产级工程技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="addyosmani/agent-skills 面向 ai 编程助手的生产级工程技能包 skills/prompts">
   <span class="rank">14</span>
   <div class="body">
     <div class="title">
@@ -2351,7 +2353,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:22.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="dietrichgebert/ponytail 让 ai agent 像资深开发者一样写最少必要代码的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="dietrichgebert/ponytail 让 ai agent 像资深开发者一样写最少必要代码的技能包 skills/prompts">
   <span class="rank">16</span>
   <div class="body">
     <div class="title">
@@ -2370,7 +2372,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:21.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="graphify-labs/graphify 将代码库转为可查询知识图谱的 agent 技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="graphify-labs/graphify 将代码库转为可查询知识图谱的 agent 技能包 skills/prompts">
   <span class="rank">17</span>
   <div class="body">
     <div class="title">
@@ -2404,7 +2406,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:20.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="obra/superpowers 为 coding agent 提供的完整软件开发方法论技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="obra/superpowers 为 coding agent 提供的完整软件开发方法论技能包 skills/prompts">
   <span class="rank">19</span>
   <div class="body">
     <div class="title">
@@ -2423,7 +2425,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="heygen-com/hyperframes 为 ai agent 提供视频制作技能包的 html 转视频框架 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="heygen-com/hyperframes 为 ai agent 提供视频制作技能包的 html 转视频框架 skills/prompts">
   <span class="rank">20</span>
   <div class="body">
     <div class="title">
@@ -2442,7 +2444,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="affaan-m/ecc 为 coding agent 提供工程化系统的运行时增强工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="affaan-m/ecc 为 coding agent 提供工程化系统的运行时增强工具 harness/运行时">
   <span class="rank">21</span>
   <div class="body">
     <div class="title">
@@ -2461,7 +2463,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="d4vinci/scrapling 支持 mcp 协议的 python 网页抓取框架 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="d4vinci/scrapling 支持 mcp 协议的 python 网页抓取框架 mcp server/工具">
   <span class="rank">22</span>
   <div class="body">
     <div class="title">
@@ -2480,7 +2482,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="qybaihe/bla 防御ai逆向工程的对抗性混淆工具 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="qybaihe/bla 防御ai逆向工程的对抗性混淆工具 skills/prompts">
   <span class="rank">23</span>
   <div class="body">
     <div class="title">
@@ -2499,7 +2501,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:18.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="amosblomqvist/learnharness 用 ai agent 教学的自适应学习系统 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="amosblomqvist/learnharness 用 ai agent 教学的自适应学习系统 harness/运行时">
   <span class="rank">24</span>
   <div class="body">
     <div class="title">
@@ -2533,7 +2535,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:16.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="leonxlnx/taste-skill 给编程 agent 提供设计品味的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="leonxlnx/taste-skill 给编程 agent 提供设计品味的技能包 skills/prompts">
   <span class="rank">26</span>
   <div class="body">
     <div class="title">
@@ -2552,7 +2554,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:15.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="donchitos/claude-code-game-studios 将 claude code 变成游戏开发工作室的多 agent 系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="donchitos/claude-code-game-studios 将 claude code 变成游戏开发工作室的多 agent 系统 agent 框架">
   <span class="rank">27</span>
   <div class="body">
     <div class="title">
@@ -2571,7 +2573,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:15.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="blader/humanizer 移除 ai 写作痕迹的 agent 技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="blader/humanizer 移除 ai 写作痕迹的 agent 技能包 skills/prompts">
   <span class="rank">28</span>
   <div class="body">
     <div class="title">
@@ -2590,7 +2592,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:15.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="zhulinsen/daily_stock_analysis 多市场股票ai分析系统，每日推送决策报告 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="zhulinsen/daily_stock_analysis 多市场股票ai分析系统，每日推送决策报告 agent 应用">
   <span class="rank">29</span>
   <div class="body">
     <div class="title">
@@ -2609,7 +2611,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:14.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="nextlevelbuilder/ui-ux-pro-max-skill 为 ai 编程助手提供 ui/ux 设计智能的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="nextlevelbuilder/ui-ux-pro-max-skill 为 ai 编程助手提供 ui/ux 设计智能的技能包 skills/prompts">
   <span class="rank">30</span>
   <div class="body">
     <div class="title">
@@ -2643,7 +2645,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:14.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="thedotmack/claude-mem 为 ai agent 提供跨会话持久记忆的本地工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="thedotmack/claude-mem 为 ai agent 提供跨会话持久记忆的本地工具 harness/运行时">
   <span class="rank">32</span>
   <div class="body">
     <div class="title">
@@ -2677,7 +2679,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:13.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="firecrawl/firecrawl 为 ai agent 提供网页数据的搜索、抓取和交互 api agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="firecrawl/firecrawl 为 ai agent 提供网页数据的搜索、抓取和交互 api agent 应用">
   <span class="rank">34</span>
   <div class="body">
     <div class="title">
@@ -2696,7 +2698,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:13.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="nousresearch/hermes-agent 自改进 ai agent 框架，内置学习循环和技能系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="nousresearch/hermes-agent 自改进 ai agent 框架，内置学习循环和技能系统 agent 框架">
   <span class="rank">35</span>
   <div class="body">
     <div class="title">
@@ -2730,7 +2732,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:12.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="hugohe3/ppt-master 让 ai agent 从文档生成原生可编辑 powerpoint 的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="hugohe3/ppt-master 让 ai agent 从文档生成原生可编辑 powerpoint 的技能包 skills/prompts">
   <span class="rank">37</span>
   <div class="body">
     <div class="title">
@@ -2764,7 +2766,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:12.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="hkuds/deeptutor agent 驱动的个性化学习工作空间 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="hkuds/deeptutor agent 驱动的个性化学习工作空间 agent 应用">
   <span class="rank">39</span>
   <div class="body">
     <div class="title">
@@ -2783,7 +2785,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:11.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="patch-gg/pixelfx 244 个像素艺术效果及 claude code skill skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="patch-gg/pixelfx 244 个像素艺术效果及 claude code skill skills/prompts">
   <span class="rank">40</span>
   <div class="body">
     <div class="title">
@@ -2817,7 +2819,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="shinyobjectz/raea 为agent设计的多媒体内容渲染引擎 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="shinyobjectz/raea 为agent设计的多媒体内容渲染引擎 mcp server/工具">
   <span class="rank">42</span>
   <div class="body">
     <div class="title">
@@ -2836,7 +2838,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="cheaper-inference/omniroute 统一 ai 网关，聚合 382 个模型提供商到一个端点 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="cheaper-inference/omniroute 统一 ai 网关，聚合 382 个模型提供商到一个端点 harness/运行时">
   <span class="rank">43</span>
   <div class="body">
     <div class="title">
@@ -2855,7 +2857,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="jakeschincariol/day-trader-skill 日间交易的 11 个 claude skill skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="jakeschincariol/day-trader-skill 日间交易的 11 个 claude skill skills/prompts">
   <span class="rank">44</span>
   <div class="body">
     <div class="title">
@@ -2889,7 +2891,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="paperclipai/paperclip 多 agent 编排管理平台，像管理公司一样运营 ai agent 团队 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="paperclipai/paperclip 多 agent 编排管理平台，像管理公司一样运营 ai agent 团队 harness/运行时">
   <span class="rank">46</span>
   <div class="body">
     <div class="title">
@@ -2923,7 +2925,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="openmontageinc/openmontage 将 ai 编程助手变为完整视频制作系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="openmontageinc/openmontage 将 ai 编程助手变为完整视频制作系统 agent 框架">
   <span class="rank">48</span>
   <div class="body">
     <div class="title">
@@ -2942,7 +2944,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="farion1231/cc-switch 多 agent 编程工具的统一配置管理器 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="farion1231/cc-switch 多 agent 编程工具的统一配置管理器 harness/运行时">
   <span class="rank">49</span>
   <div class="body">
     <div class="title">
@@ -2961,7 +2963,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:9.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="lobehub/lobehub 团队协作型 agent 运行平台 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="lobehub/lobehub 团队协作型 agent 运行平台 harness/运行时">
   <span class="rank">50</span>
   <div class="body">
     <div class="title">
@@ -2987,7 +2989,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
 <section class="panel" id="panel-new" data-panel="new">
   <div class="panel-head"><h2>新项目</h2><span class="note">30 天内创建且 star ≥ 100</span><span class="count" data-count></span></div>
   <ol class="list" id="list-new" data-list>
-<li class="card" data-cat="Harness/运行时" data-text="ccch1mneyyy/dsh-go deepseek harness 的 android 手机客户端 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="ccch1mneyyy/dsh-go deepseek harness 的 android 手机客户端 harness/运行时">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -3006,7 +3008,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="amosblomqvist/learnharness 用 ai agent 教学的自适应学习系统 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="amosblomqvist/learnharness 用 ai agent 教学的自适应学习系统 harness/运行时">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -3025,7 +3027,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:50.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="wangzan101/mika 安卓手机上的 ai agent，自动化操作应用和网页 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="wangzan101/mika 安卓手机上的 ai agent，自动化操作应用和网页 agent 应用">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -3044,7 +3046,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:15.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="patch-gg/pixelfx 244 个像素艺术效果及 claude code skill skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="patch-gg/pixelfx 244 个像素艺术效果及 claude code skill skills/prompts">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -3063,7 +3065,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:30.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="jakeschincariol/day-trader-skill 日间交易的 11 个 claude skill skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="jakeschincariol/day-trader-skill 日间交易的 11 个 claude skill skills/prompts">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -3082,7 +3084,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:28.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="juneyaooo/rea-video 逐镜头分析视频的 ai 工具 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="juneyaooo/rea-video 逐镜头分析视频的 ai 工具 mcp server/工具">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -3101,7 +3103,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:77.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="microsoft/tokeneconomizer 编程 agent 的成本优化插件 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="microsoft/tokeneconomizer 编程 agent 的成本优化插件 harness/运行时">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -3120,7 +3122,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="qybaihe/bla 防御ai逆向工程的对抗性混淆工具 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="qybaihe/bla 防御ai逆向工程的对抗性混淆工具 skills/prompts">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -3139,7 +3141,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:51.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="leonxlnx/earshot 给coding agent提供声音分析和生成能力 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="leonxlnx/earshot 给coding agent提供声音分析和生成能力 mcp server/工具">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -3158,7 +3160,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:7.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="kkkkhazix/agent-autoloop 命令行agent的自动化中台和运行时框架 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="kkkkhazix/agent-autoloop 命令行agent的自动化中台和运行时框架 harness/运行时">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -3177,7 +3179,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:11.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="haydenschmitty/floorplan claude/codex画出你代码库的交互地图 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="haydenschmitty/floorplan claude/codex画出你代码库的交互地图 skills/prompts">
   <span class="rank">11</span>
   <div class="body">
     <div class="title">
@@ -3196,7 +3198,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:8.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="t3dotgg/tstack 日常用的agent技能包：提pr、审查、协调模型 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="t3dotgg/tstack 日常用的agent技能包：提pr、审查、协调模型 skills/prompts">
   <span class="rank">12</span>
   <div class="body">
     <div class="title">
@@ -3215,7 +3217,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="modelflare-ai/anymodelbot 本地运行的个人ai智能体，支持任意模型 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="modelflare-ai/anymodelbot 本地运行的个人ai智能体，支持任意模型 agent 应用">
   <span class="rank">13</span>
   <div class="body">
     <div class="title">
@@ -3234,7 +3236,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:21.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="alchaincyf/huashu-motion 给ai agent的发布片制作技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="alchaincyf/huashu-motion 给ai agent的发布片制作技能包 skills/prompts">
   <span class="rank">14</span>
   <div class="body">
     <div class="title">
@@ -3253,7 +3255,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="denissergeevitch/ex-ussr-kinship-research 前苏联地区家族史研究的ai agent技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="denissergeevitch/ex-ussr-kinship-research 前苏联地区家族史研究的ai agent技能包 skills/prompts">
   <span class="rank">15</span>
   <div class="body">
     <div class="title">
@@ -3272,7 +3274,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="caru-ini/stack-diagram 用一句话描述技术栈自动生成架构图 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="caru-ini/stack-diagram 用一句话描述技术栈自动生成架构图 skills/prompts">
   <span class="rank">16</span>
   <div class="body">
     <div class="title">
@@ -3291,7 +3293,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="underleveledbuilder/awesome-short-drama-skills ai短剧创作技能包精选集 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="underleveledbuilder/awesome-short-drama-skills ai短剧创作技能包精选集 skills/prompts">
   <span class="rank">17</span>
   <div class="body">
     <div class="title">
@@ -3310,7 +3312,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="zhuyansen/new-term-radar 实时监测新兴ai产品术语的每日雷达 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="zhuyansen/new-term-radar 实时监测新兴ai产品术语的每日雷达 mcp server/工具">
   <span class="rank">18</span>
   <div class="body">
     <div class="title">
@@ -3329,7 +3331,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="cranebeaker/coop-anything ai智能体为单人游戏添加多人合作模式 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="cranebeaker/coop-anything ai智能体为单人游戏添加多人合作模式 mcp server/工具">
   <span class="rank">19</span>
   <div class="body">
     <div class="title">
@@ -3348,7 +3350,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="enesozturk/dimensional-drawing 教ai生成苹果风格的ui尺寸标注图 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="enesozturk/dimensional-drawing 教ai生成苹果风格的ui尺寸标注图 skills/prompts">
   <span class="rank">20</span>
   <div class="body">
     <div class="title">
@@ -3367,7 +3369,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="copilotkit/openduet 开源主动型ai agent应用平台 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="copilotkit/openduet 开源主动型ai agent应用平台 agent 应用">
   <span class="rank">21</span>
   <div class="body">
     <div class="title">
@@ -3386,7 +3388,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="shinyobjectz/raea 为agent设计的多媒体内容渲染引擎 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="shinyobjectz/raea 为agent设计的多媒体内容渲染引擎 mcp server/工具">
   <span class="rank">22</span>
   <div class="body">
     <div class="title">
@@ -3405,7 +3407,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:28.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="dunhkpcc/claude-guardian claude账号安全和防封准备的完整agent skill skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="dunhkpcc/claude-guardian claude账号安全和防封准备的完整agent skill skills/prompts">
   <span class="rank">23</span>
   <div class="body">
     <div class="title">
@@ -3424,7 +3426,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="lexifina/global-law 任意国家任意时间的法律查询mcp服务 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="lexifina/global-law 任意国家任意时间的法律查询mcp服务 mcp server/工具">
   <span class="rank">24</span>
   <div class="body">
     <div class="title">
@@ -3443,7 +3445,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="andyhuo520/digital-human-koubo 一张照片加文本生成口播视频的数字人技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="andyhuo520/digital-human-koubo 一张照片加文本生成口播视频的数字人技能包 skills/prompts">
   <span class="rank">25</span>
   <div class="body">
     <div class="title">
@@ -3462,7 +3464,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="n1neman/sapper-v2 多 agent 编排的自主渗透测试系统 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="n1neman/sapper-v2 多 agent 编排的自主渗透测试系统 harness/运行时">
   <span class="rank">26</span>
   <div class="body">
     <div class="title">
@@ -3481,7 +3483,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:7.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="morganlinton/beautifulrust 教ai写习惯用法的rust代码的三个skill skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="morganlinton/beautifulrust 教ai写习惯用法的rust代码的三个skill skills/prompts">
   <span class="rank">27</span>
   <div class="body">
     <div class="title">
@@ -3500,7 +3502,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="daveebbelaar/bama 用于构建原生 macos 应用的 agent 技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="daveebbelaar/bama 用于构建原生 macos 应用的 agent 技能包 skills/prompts">
   <span class="rank">28</span>
   <div class="body">
     <div class="title">
@@ -3519,7 +3521,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="diygod/pinky 让ai agent通过mcp操控真实手机 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="diygod/pinky 让ai agent通过mcp操控真实手机 mcp server/工具">
   <span class="rank">29</span>
   <div class="body">
     <div class="title">
@@ -3538,7 +3540,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:21.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="reason-machines/reason-network 多 agent 间的端到端加密对等通信网络 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="reason-machines/reason-network 多 agent 间的端到端加密对等通信网络 harness/运行时">
   <span class="rank">30</span>
   <div class="body">
     <div class="title">
@@ -3557,7 +3559,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="jakeschincariol/trader-skill 11 个 claude 投资决策技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="jakeschincariol/trader-skill 11 个 claude 投资决策技能包 skills/prompts">
   <span class="rank">31</span>
   <div class="body">
     <div class="title">
@@ -3576,7 +3578,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="zichuanlan/agent-purge 统一管理多个编程 agent 的系统提示词工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="zichuanlan/agent-purge 统一管理多个编程 agent 的系统提示词工具 harness/运行时">
   <span class="rank">32</span>
   <div class="body">
     <div class="title">
@@ -3595,7 +3597,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="niazmorshed2007/reanimate claude code 动画逆向工程技能 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="niazmorshed2007/reanimate claude code 动画逆向工程技能 skills/prompts">
   <span class="rank">33</span>
   <div class="body">
     <div class="title">
@@ -3614,7 +3616,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="voyager-so/vork 无头3d和vfx渲染引擎，专为ai智能体设计 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="voyager-so/vork 无头3d和vfx渲染引擎，专为ai智能体设计 agent 框架">
   <span class="rank">34</span>
   <div class="body">
     <div class="title">
@@ -3633,7 +3635,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="ebony-vinyl/eac-design-world deepseek harness的本地视频制作与设计工作室 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="ebony-vinyl/eac-design-world deepseek harness的本地视频制作与设计工作室 agent 应用">
   <span class="rank">35</span>
   <div class="body">
     <div class="title">
@@ -3652,7 +3654,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:7.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="juliobsz/skills 一行指令让代理生成获奖级网站 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="juliobsz/skills 一行指令让代理生成获奖级网站 skills/prompts">
   <span class="rank">36</span>
   <div class="body">
     <div class="title">
@@ -3671,7 +3673,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="cutetailbud/ff-ruyijs ai自动化用的轻量无头浏览器引擎 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="cutetailbud/ff-ruyijs ai自动化用的轻量无头浏览器引擎 mcp server/工具">
   <span class="rank">37</span>
   <div class="body">
     <div class="title">
@@ -3690,7 +3692,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="heqiangdiao-wq/ai-cross-border-ecommerce-agent-toolkit 跨境电商运营的7个ai agent工作流和提示词 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="heqiangdiao-wq/ai-cross-border-ecommerce-agent-toolkit 跨境电商运营的7个ai agent工作流和提示词 skills/prompts">
   <span class="rank">38</span>
   <div class="body">
     <div class="title">
@@ -3709,7 +3711,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="feder-cr/git-ai agent专用的高速版本控制系统 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="feder-cr/git-ai agent专用的高速版本控制系统 harness/运行时">
   <span class="rank">39</span>
   <div class="body">
     <div class="title">
@@ -3728,7 +3730,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="zfinix/eleven agent专用的逆向工程分析应用 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="zfinix/eleven agent专用的逆向工程分析应用 mcp server/工具">
   <span class="rank">40</span>
   <div class="body">
     <div class="title">
@@ -3747,7 +3749,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="tonf1917/claude-desktop-multiple-windows-different-api 多窗口claude desktop代理配置管理工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="tonf1917/claude-desktop-multiple-windows-different-api 多窗口claude desktop代理配置管理工具 harness/运行时">
   <span class="rank">41</span>
   <div class="body">
     <div class="title">
@@ -3766,7 +3768,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="yzlin286-wq/deepscient ai与人类协作的科学研究全流程工作台 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="yzlin286-wq/deepscient ai与人类协作的科学研究全流程工作台 agent 应用">
   <span class="rank">42</span>
   <div class="body">
     <div class="title">
@@ -3785,7 +3787,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="el4cteo/blender-skills blender完整3d工作流的28项agent技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="el4cteo/blender-skills blender完整3d工作流的28项agent技能包 skills/prompts">
   <span class="rank">43</span>
   <div class="body">
     <div class="title">
@@ -3804,7 +3806,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="sahenjp/rustxng 自部署元搜索与接地引擎 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="sahenjp/rustxng 自部署元搜索与接地引擎 mcp server/工具">
   <span class="rank">44</span>
   <div class="body">
     <div class="title">
@@ -3823,7 +3825,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="xiaoyecodes/code-animation-prompts 341种代码动画风格提示词库 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="xiaoyecodes/code-animation-prompts 341种代码动画风格提示词库 skills/prompts">
   <span class="rank">45</span>
   <div class="body">
     <div class="title">
@@ -3842,7 +3844,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="josssphzhou/poki 让 ai agent 通过 mcp 操控真实 iphone 的本地服务器 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="josssphzhou/poki 让 ai agent 通过 mcp 操控真实 iphone 的本地服务器 mcp server/工具">
   <span class="rank">46</span>
   <div class="body">
     <div class="title">
@@ -3861,7 +3863,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:12.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="huaxialucaicaizi/ai-startup-skills 创业全流程的7步agent技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="huaxialucaicaizi/ai-startup-skills 创业全流程的7步agent技能包 skills/prompts">
   <span class="rank">47</span>
   <div class="body">
     <div class="title">
@@ -3880,7 +3882,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="jackwener/dsh-android 在android手机上运行deepseek agent harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="jackwener/dsh-android 在android手机上运行deepseek agent harness/运行时">
   <span class="rank">48</span>
   <div class="body">
     <div class="title">
@@ -3899,7 +3901,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="kitlangton/scrawl 为agent展示问题的屏幕记录标注工具 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="kitlangton/scrawl 为agent展示问题的屏幕记录标注工具 coding agent">
   <span class="rank">49</span>
   <div class="body">
     <div class="title">
@@ -3918,7 +3920,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="zgsfsec/full-chain-sentinel-system 网络安全渗透测试agent系统 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="zgsfsec/full-chain-sentinel-system 网络安全渗透测试agent系统 agent 应用">
   <span class="rank">50</span>
   <div class="body">
     <div class="title">
@@ -3946,7 +3948,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">Agent 框架</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-1" data-list>
-<li class="card" data-cat="Agent 框架" data-text="nousresearch/hermes-agent 自改进 ai agent 框架，内置学习循环和技能系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="nousresearch/hermes-agent 自改进 ai agent 框架，内置学习循环和技能系统 agent 框架">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -3965,7 +3967,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="n8n-io/n8n 可视化工作流自动化平台，支持构建 ai agent 和多步骤工作流 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="n8n-io/n8n 可视化工作流自动化平台，支持构建 ai agent 和多步骤工作流 agent 框架">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -3984,7 +3986,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:25.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="langgenius/dify 可视化构建 agent 工作流和 rag 的开发平台 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="langgenius/dify 可视化构建 agent 工作流和 rag 的开发平台 agent 框架">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -4003,7 +4005,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:32.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="langflow-ai/langflow 可视化构建和部署 ai agent 与工作流的平台 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="langflow-ai/langflow 可视化构建和部署 ai agent 与工作流的平台 agent 框架">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -4022,7 +4024,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:5.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="langchain-ai/langchain 构建 agent 和 llm 应用的框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="langchain-ai/langchain 构建 agent 和 llm 应用的框架 agent 框架">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -4041,7 +4043,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:13.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="tauricresearch/tradingagents 模拟真实交易公司的多智能体金融交易框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="tauricresearch/tradingagents 模拟真实交易公司的多智能体金融交易框架 agent 框架">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -4060,7 +4062,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:53.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="browser-use/browser-use 让 ai agent 像人类一样操作浏览器的开源 python 库 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="browser-use/browser-use 让 ai agent 像人类一样操作浏览器的开源 python 库 agent 框架">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -4079,7 +4081,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:45.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="openmontageinc/openmontage 将 ai 编程助手变为完整视频制作系统 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="openmontageinc/openmontage 将 ai 编程助手变为完整视频制作系统 agent 框架">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -4098,7 +4100,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:77.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="foundationagents/metagpt 多智能体协作框架，模拟软件公司角色分工 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="foundationagents/metagpt 多智能体协作框架，模拟软件公司角色分工 agent 框架">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -4117,7 +4119,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 框架" data-text="microsoft/autogen 用于构建多 agent ai 应用的编程框架 agent 框架">
+<li class="card has-info" data-cat="Agent 框架" data-text="microsoft/autogen 用于构建多 agent ai 应用的编程框架 agent 框架">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -4142,7 +4144,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">Coding Agent</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-2" data-list>
-<li class="card" data-cat="Coding Agent" data-text="earendil-works/pi 可扩展的编程助手命令行工具 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="earendil-works/pi 可扩展的编程助手命令行工具 coding agent">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -4161,7 +4163,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="google-gemini/gemini-cli google 官方的终端编程助手，专为企业代码辅助场景设计 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="google-gemini/gemini-cli google 官方的终端编程助手，专为企业代码辅助场景设计 coding agent">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -4180,7 +4182,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:9.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="code-yeongyu/oh-my-openagent 命令行 ai 编程助手，支持多模型协作和图编排 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="code-yeongyu/oh-my-openagent 命令行 ai 编程助手，支持多模型协作和图编排 coding agent">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -4199,7 +4201,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:10.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="openinterpreter/openinterpreter 为低成本模型优化的编程助手 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="openinterpreter/openinterpreter 为低成本模型优化的编程助手 coding agent">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -4218,7 +4220,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="alibaba/open-code-review ai 驱动的代码审查 cli 工具 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="alibaba/open-code-review ai 驱动的代码审查 cli 工具 coding agent">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -4237,7 +4239,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:37.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="codewhale-hq/codewhale 终端中的开源编程助手，支持40多个模型提供商 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="codewhale-hq/codewhale 终端中的开源编程助手，支持40多个模型提供商 coding agent">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -4256,7 +4258,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="can1357/oh-my-pi 功能完备的命令行编程助手，集成 ide 级代码智能 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="can1357/oh-my-pi 功能完备的命令行编程助手，集成 ide 级代码智能 coding agent">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -4275,7 +4277,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:65.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="continuedev/continue 开源编程 agent，支持 cli、vs code 和 jetbrains 插件 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="continuedev/continue 开源编程 agent，支持 cli、vs code 和 jetbrains 插件 coding agent">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -4294,7 +4296,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:4.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="esengine/deepseek-reasonix 本地运行的开源编程助手，可读写代码和执行命令 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="esengine/deepseek-reasonix 本地运行的开源编程助手，可读写代码和执行命令 coding agent">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -4313,7 +4315,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:0.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Coding Agent" data-text="twigpine/openclaude 跨云端与本地模型的开源编程 agent 命令行工具 coding agent">
+<li class="card has-info" data-cat="Coding Agent" data-text="twigpine/openclaude 跨云端与本地模型的开源编程 agent 命令行工具 coding agent">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -4338,7 +4340,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">Agent 应用</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-3" data-list>
-<li class="card" data-cat="Agent 应用" data-text="firecrawl/firecrawl 为 ai agent 提供网页数据的搜索、抓取和交互 api agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="firecrawl/firecrawl 为 ai agent 提供网页数据的搜索、抓取和交互 api agent 应用">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -4357,7 +4359,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:89.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="significant-gravitas/autogpt 多智能体协调平台，一句话分配工作给专家 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="significant-gravitas/autogpt 多智能体协调平台，一句话分配工作给专家 agent 应用">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -4376,7 +4378,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="open-webui/open-webui 可自托管的 ai 聊天界面和 agent 运行平台 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="open-webui/open-webui 可自托管的 ai 聊天界面和 agent 运行平台 agent 应用">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -4395,7 +4397,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.9%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="nexu-io/open-design 协作式 ai 设计工作区，用 agent 生成原型、演示文稿、视频 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="nexu-io/open-design 协作式 ai 设计工作区，用 agent 生成原型、演示文稿、视频 agent 应用">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -4414,7 +4416,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:41.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="karpathy/autoresearch 让 ai agent 自主修改代码优化 llm 训练 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="karpathy/autoresearch 让 ai agent 自主修改代码优化 llm 训练 agent 应用">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -4433,7 +4435,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:12.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="career-ops-hq/career-ops ai 求职助手，评估职位匹配度并生成简历 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="career-ops-hq/career-ops ai 求职助手，评估职位匹配度并生成简历 agent 应用">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -4452,7 +4454,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:60.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="usestrix/strix 自主 ai 渗透测试工具，自动发现和验证应用漏洞 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="usestrix/strix 自主 ai 渗透测试工具，自动发现和验证应用漏洞 agent 应用">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -4471,7 +4473,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:39.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="ai-job-search-dev/ai-job-search 基于 claude code 的求职自动化框架 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="ai-job-search-dev/ai-job-search 基于 claude code 的求职自动化框架 agent 应用">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -4490,7 +4492,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:49.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="zhulinsen/daily_stock_analysis 多市场股票ai分析系统，每日推送决策报告 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="zhulinsen/daily_stock_analysis 多市场股票ai分析系统，每日推送决策报告 agent 应用">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -4509,7 +4511,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Agent 应用" data-text="sansan0/trendradar ai 驱动的多平台热点聚合与舆情监控工具 agent 应用">
+<li class="card has-info" data-cat="Agent 应用" data-text="sansan0/trendradar ai 驱动的多平台热点聚合与舆情监控工具 agent 应用">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -4534,7 +4536,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">MCP Server/工具</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-4" data-list>
-<li class="card" data-cat="MCP Server/工具" data-text="morluto/rea 通过 mcp 为 ai agent 提供逆向工程能力的工具链 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="morluto/rea 通过 mcp 为 ai agent 提供逆向工程能力的工具链 mcp server/工具">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -4553,7 +4555,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="d4vinci/scrapling 支持 mcp 协议的 python 网页抓取框架 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="d4vinci/scrapling 支持 mcp 协议的 python 网页抓取框架 mcp server/工具">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -4572,7 +4574,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="koala73/worldmonitor 全球情报监控仪表板的 mcp server 和 api mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="koala73/worldmonitor 全球情报监控仪表板的 mcp server 和 api mcp server/工具">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -4591,7 +4593,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="unclecode/crawl4ai 为 ai agent 提供网页抓取和数据提取的托管 api 与开源爬虫 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="unclecode/crawl4ai 为 ai agent 提供网页抓取和数据提取的托管 api 与开源爬虫 mcp server/工具">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -4610,7 +4612,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="headroomlabs-ai/headroom 本地压缩 agent 上下文的工具和 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="headroomlabs-ai/headroom 本地压缩 agent 上下文的工具和 mcp server mcp server/工具">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -4629,7 +4631,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:2.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="upstash/context7 为编程 agent 提供最新库文档的 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="upstash/context7 为编程 agent 提供最新库文档的 mcp server mcp server/工具">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -4648,7 +4650,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:3.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="chromedevtools/chrome-devtools-mcp 让 ai 编程助手控制和调试 chrome 浏览器的 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="chromedevtools/chrome-devtools-mcp 让 ai 编程助手控制和调试 chrome 浏览器的 mcp server mcp server/工具">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -4667,7 +4669,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="deusdata/codebase-memory-mcp 本地代码知识图谱 mcp server mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="deusdata/codebase-memory-mcp 本地代码知识图谱 mcp server mcp server/工具">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -4686,7 +4688,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="reactive-resume/reactive-resume 简历编辑器，提供 mcp server 和 agent skills mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="reactive-resume/reactive-resume 简历编辑器，提供 mcp server 和 agent skills mcp server/工具">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -4705,7 +4707,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:1.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="MCP Server/工具" data-text="microsoft/playwright-mcp 让 llm 通过 mcp 协议控制浏览器的服务端 mcp server/工具">
+<li class="card has-info" data-cat="MCP Server/工具" data-text="microsoft/playwright-mcp 让 llm 通过 mcp 协议控制浏览器的服务端 mcp server/工具">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -4730,7 +4732,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">Skills/Prompts</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-5" data-list>
-<li class="card" data-cat="Skills/Prompts" data-text="obra/superpowers 为 coding agent 提供的完整软件开发方法论技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="obra/superpowers 为 coding agent 提供的完整软件开发方法论技能包 skills/prompts">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -4749,7 +4751,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:48.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="anthropics/skills anthropic 官方的 claude agent 技能包仓库 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="anthropics/skills anthropic 官方的 claude agent 技能包仓库 skills/prompts">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -4768,7 +4770,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="dietrichgebert/ponytail 让 ai agent 像资深开发者一样写最少必要代码的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="dietrichgebert/ponytail 让 ai agent 像资深开发者一样写最少必要代码的技能包 skills/prompts">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -4787,7 +4789,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:52.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="nextlevelbuilder/ui-ux-pro-max-skill 为 ai 编程助手提供 ui/ux 设计智能的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="nextlevelbuilder/ui-ux-pro-max-skill 为 ai 编程助手提供 ui/ux 设计智能的技能包 skills/prompts">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -4806,7 +4808,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:34.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="graphify-labs/graphify 将代码库转为可查询知识图谱的 agent 技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="graphify-labs/graphify 将代码库转为可查询知识图谱的 agent 技能包 skills/prompts">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -4825,7 +4827,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:51.2%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="juliusbrussee/caveman 让 ai agent 用简化语言回复和压缩输入的技能包和代理工具 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="juliusbrussee/caveman 让 ai agent 用简化语言回复和压缩输入的技能包和代理工具 skills/prompts">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -4844,7 +4846,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:19.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="addyosmani/agent-skills 面向 ai 编程助手的生产级工程技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="addyosmani/agent-skills 面向 ai 编程助手的生产级工程技能包 skills/prompts">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -4863,7 +4865,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:55.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="leonxlnx/taste-skill 给编程 agent 提供设计品味的技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="leonxlnx/taste-skill 给编程 agent 提供设计品味的技能包 skills/prompts">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -4882,7 +4884,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:37.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="pbakaus/impeccable 为编码 agent 提供设计指令词汇和质量检测 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="pbakaus/impeccable 为编码 agent 提供设计指令词汇和质量检测 skills/prompts">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -4901,7 +4903,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:57.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Skills/Prompts" data-text="tt-a1i/archify 为 coding agent 提供的可视化技能包 skills/prompts">
+<li class="card has-info" data-cat="Skills/Prompts" data-text="tt-a1i/archify 为 coding agent 提供的可视化技能包 skills/prompts">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -4926,7 +4928,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">Harness/运行时</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-6" data-list>
-<li class="card" data-cat="Harness/运行时" data-text="affaan-m/ecc 为 coding agent 提供工程化系统的运行时增强工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="affaan-m/ecc 为 coding agent 提供工程化系统的运行时增强工具 harness/运行时">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -4945,7 +4947,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:55.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="deepseek-ai/deepseek-harness 基于插件架构的 agent 运行环境 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="deepseek-ai/deepseek-harness 基于插件架构的 agent 运行环境 harness/运行时">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -4964,7 +4966,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:76.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="farion1231/cc-switch 多 agent 编程工具的统一配置管理器 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="farion1231/cc-switch 多 agent 编程工具的统一配置管理器 harness/运行时">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -4983,7 +4985,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:28.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="stablyai/orca 多 coding agent 编排与运行环境 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="stablyai/orca 多 coding agent 编排与运行环境 harness/运行时">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -5002,7 +5004,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="thedotmack/claude-mem 为 ai agent 提供跨会话持久记忆的本地工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="thedotmack/claude-mem 为 ai agent 提供跨会话持久记忆的本地工具 harness/运行时">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -5021,7 +5023,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:40.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="paperclipai/paperclip 多 agent 编排管理平台，像管理公司一样运营 ai agent 团队 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="paperclipai/paperclip 多 agent 编排管理平台，像管理公司一样运营 ai agent 团队 harness/运行时">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -5040,7 +5042,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:28.8%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="panniantong/agent-reach 给 cli agent 提供互联网数据采集能力的工具 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="panniantong/agent-reach 给 cli agent 提供互联网数据采集能力的工具 harness/运行时">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -5059,7 +5061,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:25.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="infiniflow/ragflow 融合 rag 和 agent 能力的上下文引擎 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="infiniflow/ragflow 融合 rag 和 agent 能力的上下文引擎 harness/运行时">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -5078,7 +5080,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:6.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="openhands/openhands 自托管的 coding agent 控制中心与自动化平台 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="openhands/openhands 自托管的 coding agent 控制中心与自动化平台 harness/运行时">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -5097,7 +5099,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:9.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="Harness/运行时" data-text="cheaper-inference/omniroute 统一 ai 网关，聚合 382 个模型提供商到一个端点 harness/运行时">
+<li class="card has-info" data-cat="Harness/运行时" data-text="cheaper-inference/omniroute 统一 ai 网关，聚合 382 个模型提供商到一个端点 harness/运行时">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -5122,7 +5124,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
   <div class="group" data-group>
     <h3><span class="tag">教程/Awesome</span><span class="n">10</span></h3>
     <ol class="list" id="list-cat-7" data-list>
-<li class="card" data-cat="教程/Awesome" data-text="shubhamsaboo/awesome-llm-apps 100多个开源ai agent、技能和rag应用模板合集 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="shubhamsaboo/awesome-llm-apps 100多个开源ai agent、技能和rag应用模板合集 教程/awesome">
   <span class="rank top top1">1</span>
   <div class="body">
     <div class="title">
@@ -5141,7 +5143,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:40.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="punkpeye/awesome-mcp-servers mcp server 精选列表和目录 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="punkpeye/awesome-mcp-servers mcp server 精选列表和目录 教程/awesome">
   <span class="rank top top2">2</span>
   <div class="body">
     <div class="title">
@@ -5160,7 +5162,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:21.1%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="datawhalechina/hello-agents 从零开始构建 ai agent 的系统性中文教程 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="datawhalechina/hello-agents 从零开始构建 ai agent 的系统性中文教程 教程/awesome">
   <span class="rank top top3">3</span>
   <div class="body">
     <div class="title">
@@ -5179,7 +5181,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:55.4%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="shareai-lab/learn-claude-code 从零构建 agent 运行时的 17 课渐进式教程 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="shareai-lab/learn-claude-code 从零构建 agent 运行时的 17 课渐进式教程 教程/awesome">
   <span class="rank">4</span>
   <div class="body">
     <div class="title">
@@ -5198,7 +5200,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:36.7%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="dair-ai/prompt-engineering-guide 提示工程、rag 和 ai agents 的综合学习指南 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="dair-ai/prompt-engineering-guide 提示工程、rag 和 ai agents 的综合学习指南 教程/awesome">
   <span class="rank">5</span>
   <div class="body">
     <div class="title">
@@ -5217,7 +5219,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:13.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="microsoft/ai-agents-for-beginners 微软出品的 ai agent 入门课程，共 18 课 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="microsoft/ai-agents-for-beginners 微软出品的 ai agent 入门课程，共 18 课 教程/awesome">
   <span class="rank">6</span>
   <div class="body">
     <div class="title">
@@ -5236,7 +5238,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:35.5%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="rohitg00/ai-engineering-from-scratch 从零实现 ai 工程的完整课程体系 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="rohitg00/ai-engineering-from-scratch 从零实现 ai 工程的完整课程体系 教程/awesome">
   <span class="rank">7</span>
   <div class="body">
     <div class="title">
@@ -5255,7 +5257,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:100.0%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="shanraisshan/claude-code-best-practice claude code最佳实践和agent工作流指南 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="shanraisshan/claude-code-best-practice claude code最佳实践和agent工作流指南 教程/awesome">
   <span class="rank">8</span>
   <div class="body">
     <div class="title">
@@ -5274,7 +5276,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:25.3%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="hesreallyhim/awesome-claude-code claude code 编程助手的精选资源列表 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="hesreallyhim/awesome-claude-code claude code 编程助手的精选资源列表 教程/awesome">
   <span class="rank">9</span>
   <div class="body">
     <div class="title">
@@ -5293,7 +5295,7 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
       <span class="bar"><i style="width:50.6%"></i></span>
   </div>
 </li>
-<li class="card" data-cat="教程/Awesome" data-text="bojieli/ai-agent-book ai agent 设计原理与工程实践完整教程 教程/awesome">
+<li class="card has-info" data-cat="教程/Awesome" data-text="bojieli/ai-agent-book ai agent 设计原理与工程实践完整教程 教程/awesome">
   <span class="rank">10</span>
   <div class="body">
     <div class="title">
@@ -5391,6 +5393,15 @@ footer a { color:var(--muted); text-decoration:underline; text-underline-offset:
     });
   });
   input.addEventListener("input", function () { state.q = input.value.trim().toLowerCase(); apply(); });
+  // Clicking anywhere on a card toggles its details, except links, the summary toggle,
+  // the opened details text, and when the click ends a text selection.
+  document.addEventListener("click", function (e) {
+    var card = e.target.closest(".card.has-info");
+    if (!card || e.target.closest("a, summary, .info-body")) return;
+    if (String(window.getSelection())) return;
+    var info = card.querySelector("details.info");
+    info.open = !info.open;
+  });
   document.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-more]");
     if (!btn) return;
