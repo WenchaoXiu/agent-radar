@@ -1,0 +1,110 @@
+{%- macro span(base) -%}
+对比 {{ base.day }} 的快照{% if base.days > 1 %}（实际跨 {{ base.days }} 天）{% endif %}
+{%- endmacro -%}
+{%- macro table(rows, growth_label="日增", growth_first=false, show_category=true, date_label="最近推送", date_key="pushed_at") -%}
+<div class="scroll"><table>
+<thead><tr><th class="num">#</th><th>仓库</th>{% if show_category %}<th>分类</th>{% endif %}<th>简介</th>
+{%- if growth_first %}<th class="num">{{ growth_label }}</th><th class="num">Star</th>{% else %}<th class="num">Star</th><th class="num">{{ growth_label }}</th>{% endif -%}
+<th>语言</th><th>{{ date_label }}</th></tr></thead>
+<tbody>
+{%- for r in rows %}
+<tr>
+<td class="num">{{ r.rank }}</td>
+<td class="repo"><a href="https://github.com/{{ r.repo }}" rel="noopener">{{ r.repo }}</a></td>
+{%- if show_category %}<td>{% if r.category %}<span class="tag">{{ r.category }}</span>{% endif %}</td>{% endif %}
+<td class="desc">
+{%- if r.summary_zh or r.key_features -%}
+<details><summary>{{ r.summary }}</summary>
+{%- if r.summary_zh %}<p>{{ r.summary_zh }}</p>{% endif -%}
+{%- if r.key_features %}<ul>{% for f in r.key_features %}<li>{{ f }}</li>{% endfor %}</ul>{% endif -%}
+</details>
+{%- else -%}{{ r.summary }}{%- endif -%}
+</td>
+{%- if growth_first %}<td class="num up">{{ r | growth }}</td><td class="num">{{ r.stars | thousands }}</td>
+{%- else %}<td class="num">{{ r.stars | thousands }}</td><td class="num up">{{ r | growth }}</td>{% endif %}
+<td>{{ r.language }}</td>
+<td class="date">{{ r[date_key] | day }}</td>
+</tr>
+{%- endfor %}
+</tbody></table></div>
+{%- endmacro -%}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Radar · AI Agent 开源项目榜单</title>
+<meta name="description" content="AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日自动更新。">
+<style>
+:root { --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --bg:#fff; --alt:#f6f8fa; --accent:#0969da; --up:#1a7f37; }
+@media (prefers-color-scheme: dark) {
+  :root { --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --bg:#0d1117; --alt:#151b23; --accent:#4493f8; --up:#3fb950; }
+}
+* { box-sizing:border-box; }
+body { margin:0; font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif; color:var(--fg); background:var(--bg); }
+main { max-width:1280px; margin:0 auto; padding:24px 16px 48px; }
+h1 { margin:0 0 4px; font-size:28px; }
+h2 { margin:40px 0 8px; padding-top:8px; border-top:1px solid var(--border); }
+h3 { margin:24px 0 8px; }
+.meta, .note { color:var(--muted); margin:4px 0 12px; }
+nav { position:sticky; top:0; z-index:1; background:var(--bg); border-bottom:1px solid var(--border); padding:8px 0; display:flex; flex-wrap:wrap; gap:6px 16px; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.scroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; }
+th, td { padding:6px 8px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+th { position:sticky; top:0; background:var(--alt); white-space:nowrap; }
+tbody tr:nth-child(even) { background:var(--alt); }
+.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.up { color:var(--up); }
+.repo, .date { white-space:nowrap; }
+.desc { min-width:280px; }
+.desc summary { cursor:pointer; }
+.desc p, .desc ul { margin:6px 0; color:var(--muted); }
+.desc ul { padding-left:18px; }
+.tag { display:inline-block; padding:0 6px; border:1px solid var(--border); border-radius:10px; font-size:12px; white-space:nowrap; }
+footer { margin-top:40px; color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Agent Radar</h1>
+<p class="meta">AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日自动更新。</p>
+<p class="meta">更新时间：{{ generated_at }} UTC · 收录仓库：{{ repo_count | thousands }} 个（star ≥ {{ min_stars }}，不含 fork 和已归档仓库）</p>
+
+<nav>
+<a href="#total">总榜</a>
+{%- if daily_base %} <a href="#daily">日增</a>{% endif %}
+{%- if weekly_base %} <a href="#weekly">周增</a>{% endif %}
+ <a href="#new">新项目</a>
+{%- if categories %} <a href="#categories">分类榜</a>{% endif %}
+</nav>
+
+<h2 id="total">总榜 Top {{ total | length }}</h2>
+{% if daily_base %}<p class="note">日增{{ span(daily_base) }}；🆕 表示首次入池。点击简介可展开详细说明。</p>{% endif %}
+{{ table(total) }}
+{% if daily_base %}
+<h2 id="daily">日增 Top {{ daily | length }}</h2>
+<p class="note">{{ span(daily_base) }}。首次入池的仓库不参与排名。</p>
+{% if daily %}{{ table(daily, growth_first=true) }}{% else %}<p>暂无 star 增长的仓库。</p>{% endif %}
+{% endif %}
+{%- if weekly_base %}
+<h2 id="weekly">周增 Top {{ weekly | length }}</h2>
+<p class="note">{{ span(weekly_base) }}。首次入池的仓库不参与排名。</p>
+{% if weekly %}{{ table(weekly, growth_label="周增", growth_first=true) }}{% else %}<p>暂无 star 增长的仓库。</p>{% endif %}
+{% endif %}
+<h2 id="new">新项目 Top {{ new | length }}</h2>
+<p class="note">{{ new_repo_days }} 天内创建且 star ≥ {{ min_stars }}。</p>
+{% if new %}{{ table(new, date_label="创建日期", date_key="created_at") }}{% else %}<p>暂无符合条件的新项目。</p>{% endif %}
+{% if categories %}
+<h2 id="categories">分类榜</h2>
+<p class="note">按 LLM 分类分组，每类按 star 取前 {{ category_size }} 个。</p>
+{% for category, rows in categories %}
+<h3>{{ category }}</h3>
+{{ table(rows, show_category=false) }}
+{% endfor %}
+{% endif %}
+<footer>数据来源：GitHub Search API。分类和中文简介由 LLM 生成，仅供参考。本页由 <a href="https://github.com/WenchaoXiu/agent-radar">agent-radar</a> 自动生成。</footer>
+</main>
+</body>
+</html>

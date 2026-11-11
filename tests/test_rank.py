@@ -1,6 +1,9 @@
 from conftest import make_cfg
 
+from datetime import date
+
 from agent_radar import rank
+from agent_radar.rank import Baseline
 
 
 def meta(created="2025-01-01T00:00:00Z", **kw):
@@ -67,3 +70,47 @@ def test_by_category_grouped_ordered_and_limited():
         ("B", [(1, "b/1")]),
         ("A", [(1, "a/2"), (2, "a/3")]),
     ]
+
+
+def test_pick_baseline_day():
+    days = [date(2026, 11, 1), date(2026, 11, 4), date(2026, 11, 7), date(2026, 11, 8)]
+    today = date(2026, 11, 8)
+    assert rank.pick_baseline_day(days, today, 1) == date(2026, 11, 7)
+    assert rank.pick_baseline_day(days, today, 7) == date(2026, 11, 1)
+    assert rank.pick_baseline_day(days, today, 8) is None
+    # Missed cron runs: fall back to the most recent older snapshot.
+    assert rank.pick_baseline_day([date(2026, 11, 4), date(2026, 11, 8)], today, 1) == date(2026, 11, 4)
+
+
+def test_growth_ordering_excludes_new_and_non_positive():
+    cfg = make_cfg()
+    m = {n: meta() for n in ("a/a", "b/b", "c/c", "d/d", "e/e", "f/f")}
+    m["f/f"] = meta(fork=True)
+    snap = {"a/a": [1000, 0], "b/b": [500, 0], "c/c": [300, 0], "d/d": [800, 0], "e/e": [900, 0], "f/f": [9999, 0]}
+    base = Baseline(date(2026, 11, 7), 1, {
+        "a/a": [990, 0], "b/b": [400, 0], "c/c": [200, 0], "d/d": [810, 0], "f/f": [1, 0],
+    })  # e/e is new to the pool
+    assert rank.ordered_growth(m, snap, cfg, base) == ["b/b", "c/c", "a/a"]  # tie on +100 broken by stars
+    assert rank.ordered_growth(m, snap, cfg, None) == []
+    rows = rank.rank_growth(m, snap, cfg, base, 2)
+    assert [(r["rank"], r["repo"], r["growth"]) for r in rows] == [(1, "b/b", 100), (2, "c/c", 100)]
+
+
+def test_rows_mark_new_to_pool():
+    cfg = make_cfg()
+    m = {"a/a": meta(), "b/b": meta()}
+    snap = {"a/a": [300, 0], "b/b": [200, 0]}
+    base = Baseline(date(2026, 11, 7), 1, {"a/a": [250, 0]})
+    rows = rank.rank_total(m, snap, cfg, daily_base=base)
+    assert [(r["repo"], r["growth"], r["is_new"]) for r in rows] == [("a/a", 50, False), ("b/b", None, True)]
+    no_base = rank.rank_total(m, snap, cfg)
+    assert [(r["growth"], r["is_new"]) for r in no_base] == [(None, False), (None, False)]
+
+
+def test_board_candidates_include_growth_boards_only_with_baseline(cfg, today):
+    m = {"a/a": meta()}
+    snap = {"a/a": [300, 0]}
+    assert len(rank.board_candidates(m, snap, cfg, today)) == 2
+    base = Baseline(date(2026, 11, 7), 1, {"a/a": [200, 0]})
+    boards = rank.board_candidates(m, snap, cfg, today, base, base)
+    assert [(names, size) for names, size in boards[2:]] == [(["a/a"], 50), (["a/a"], 50)]

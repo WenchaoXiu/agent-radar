@@ -3,6 +3,7 @@ from datetime import date
 from pathlib import Path
 
 from .config import ROOT
+from .rank import Baseline, pick_baseline_day
 
 DATA_DIR = ROOT / "data"
 
@@ -59,3 +60,10 @@ def list_snapshot_dates(data_dir: Path = DATA_DIR) -> list[date]:
         month, day = path.stem.split("-")
         days.append(date(int(path.parent.name), int(month), int(day)))
     return sorted(days)
+
+
+def load_baseline(today: date, min_days: int, data_dir: Path = DATA_DIR) -> Baseline | None:
+    day = pick_baseline_day(list_snapshot_dates(data_dir), today, min_days)
+    if day is None:
+        return None
+    return Baseline(day=day, days=(today - day).days, snapshot=load_snapshot(day, data_dir))

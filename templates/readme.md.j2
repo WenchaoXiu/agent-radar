@@ -1,3 +1,6 @@
+{%- macro span(base) -%}
+对比 {{ base.day }} 的快照{% if base.days > 1 %}（实际跨 {{ base.days }} 天）{% endif %}
+{%- endmacro -%}
 # Agent Radar
 
 AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日自动更新。
@@ -5,25 +8,60 @@ AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日�
 更新时间：{{ generated_at }} UTC · 收录仓库：{{ repo_count | thousands }} 个（star ≥ {{ min_stars }}，不含 fork 和已归档仓库）
 
 - [总榜 Top {{ total | length }}](#总榜)
-- [新项目 Top {{ new | length }}](#新项目)
+{% if daily_base %}- [日增 Top {{ daily | length }}](#日增)
+{% endif %}{% if weekly_base %}- [周增 Top {{ weekly | length }}](#周增)
+{% endif %}- [新项目 Top {{ new | length }}](#新项目)
 {% if categories %}- [分类榜](#分类榜)
 {% endif %}
 ## 总榜
 
-| # | 仓库 | 分类 | 简介 | Star | 语言 | 最近推送 |
-|---:|---|---|---|---:|---|---|
+{% if daily_base %}日增{{ span(daily_base) }}；🆕 表示首次入池。
+
+{% endif -%}
+| # | 仓库 | 分类 | 简介 | Star | 日增 | 语言 | 最近推送 |
+|---:|---|---|---|---:|---:|---|---|
 {% for r in total -%}
-| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.category | cell }} | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.category | cell }} | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r | growth }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
 {% endfor %}
+{%- if daily_base %}
+## 日增
+
+{{ span(daily_base) }}。首次入池的仓库不参与排名。
+
+{% if daily -%}
+| # | 仓库 | 分类 | 简介 | 日增 | Star | 语言 | 最近推送 |
+|---:|---|---|---|---:|---:|---|---|
+{% for r in daily -%}
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.category | cell }} | {{ r.summary | cell }} | {{ r | growth }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
+{% endfor %}
+{%- else -%}
+暂无 star 增长的仓库。
+{% endif %}
+{%- endif %}
+{%- if weekly_base %}
+## 周增
+
+{{ span(weekly_base) }}。首次入池的仓库不参与排名。
+
+{% if weekly -%}
+| # | 仓库 | 分类 | 简介 | 周增 | Star | 语言 | 最近推送 |
+|---:|---|---|---|---:|---:|---|---|
+{% for r in weekly -%}
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.category | cell }} | {{ r.summary | cell }} | {{ r | growth }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
+{% endfor %}
+{%- else -%}
+暂无 star 增长的仓库。
+{% endif %}
+{%- endif %}
 ## 新项目
 
 {{ new_repo_days }} 天内创建且 star ≥ {{ min_stars }}。
 
 {% if new -%}
-| # | 仓库 | 分类 | 简介 | Star | 语言 | 创建日期 |
-|---:|---|---|---|---:|---|---|
+| # | 仓库 | 分类 | 简介 | Star | 日增 | 语言 | 创建日期 |
+|---:|---|---|---|---:|---:|---|---|
 {% for r in new -%}
-| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.category | cell }} | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.created_at | day }} |
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.category | cell }} | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r | growth }} | {{ r.language | cell }} | {{ r.created_at | day }} |
 {% endfor %}
 {%- else -%}
 暂无符合条件的新项目。
@@ -35,10 +73,10 @@ AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日�
 {% for category, rows in categories %}
 ### {{ category }}
 
-| # | 仓库 | 简介 | Star | 语言 | 最近推送 |
-|---:|---|---|---:|---|---|
+| # | 仓库 | 简介 | Star | 日增 | 语言 | 最近推送 |
+|---:|---|---|---:|---:|---|---|
 {% for r in rows -%}
-| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
+| {{ r.rank }} | [{{ r.repo }}](https://github.com/{{ r.repo }}) | {{ r.summary | cell }} | {{ r.stars | thousands }} | {{ r | growth }} | {{ r.language | cell }} | {{ r.pushed_at | day }} |
 {% endfor -%}
 {% endfor -%}
 {% endif %}

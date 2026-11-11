@@ -11,7 +11,8 @@ from .collect import collect
 from .config import ROOT, Config, load_config, load_dotenv
 from .github_api import GitHubClient
 from .llm import LLMClient, LLMUnavailable
-from .render import render_readme
+from .rank import Baseline
+from .render import render_pages, render_readme
 
 COMMANDS = {
     "daily": "采集、计算榜单、分类并渲染 README / Pages",
@@ -40,15 +41,43 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _write_readme(text: str, dry_run: bool) -> Path:
-    path = (OUT_DIR if dry_run else ROOT) / "README.md"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
-    return path
+DAILY_MIN_DAYS = 1
+WEEKLY_MIN_DAYS = 7
+
+
+def _baselines(today: date) -> tuple[Baseline | None, Baseline | None]:
+    daily, weekly = store.load_baseline(today, DAILY_MIN_DAYS), store.load_baseline(today, WEEKLY_MIN_DAYS)
+    for name, base in (("daily", daily), ("weekly", weekly)):
+        if base is None:
+            log.info("%s growth: no baseline snapshot yet, board hidden", name)
+        else:
+            log.info("%s growth: baseline %s (%d days)", name, base.day, base.days)
+    return daily, weekly
+
+
+def _write_outputs(args: tuple, kwargs: dict, dry_run: bool) -> None:
+    """Render README and Pages (docs/index.html) from the same data."""
+    root = OUT_DIR if dry_run else ROOT
+    readme = root / "README.md"
+    readme.parent.mkdir(parents=True, exist_ok=True)
+    readme.write_text(render_readme(*args, **kwargs), encoding="utf-8")
+    log.info("wrote %s", readme)
+
+    pages = root / "docs" / "index.html"
+    pages.parent.mkdir(parents=True, exist_ok=True)
+    pages.write_text(render_pages(*args, **kwargs), encoding="utf-8")
+    (pages.parent / ".nojekyll").touch()
+    log.info("wrote %s", pages)
 
 
 def _classify(
-    cfg: Config, meta: dict, snapshot: dict, today: date, gh: GitHubClient, dry_run: bool
+    cfg: Config,
+    meta: dict,
+    snapshot: dict,
+    today: date,
+    gh: GitHubClient,
+    dry_run: bool,
+    bases: tuple[Baseline | None, Baseline | None],
 ) -> tuple[dict[str, dict], set[str]]:
     """Classify board candidates; return (labels, repos to skip). Never raises on LLM outages."""
     labels = store.load_classified()
@@ -61,7 +90,7 @@ def _classify(
 
     classifier = Classifier(llm, gh.get_readme, cfg, meta, labels, datetime.now(UTC))
     try:
-        classifier.ensure_boards(rank.board_candidates(meta, snapshot, cfg, today))
+        classifier.ensure_boards(rank.board_candidates(meta, snapshot, cfg, today, *bases))
     except LLMUnavailable as exc:
         log.error("classification aborted, unclassified repos stay listed: %s", exc)
     log.info(
@@ -87,13 +116,18 @@ def cmd_daily(args: argparse.Namespace) -> int:
         if not args.dry_run:
             store.save_repos(meta)
             log.info("wrote %s", store.save_snapshot(now.date(), snapshot))
-        labels, skip = _classify(cfg, meta, snapshot, now.date(), gh, args.dry_run)
+        bases = _baselines(now.date())
+        labels, skip = _classify(cfg, meta, snapshot, now.date(), gh, args.dry_run, bases)
     finally:
         gh.close()
     log.info("github requests: %d", gh.request_count)
 
-    path = _write_readme(render_readme(cfg, meta, snapshot, now.date(), now, labels, skip), args.dry_run)
-    log.info("wrote %s", path)
+    daily_base, weekly_base = bases
+    _write_outputs(
+        (cfg, meta, snapshot, now.date(), now, labels, skip),
+        {"daily_base": daily_base, "weekly_base": weekly_base},
+        args.dry_run,
+    )
     return 0
 
 
@@ -114,7 +148,7 @@ def cmd_classify(args: argparse.Namespace) -> int:
     meta, snapshot, day = loaded
     gh = GitHubClient(token=os.environ.get("GITHUB_TOKEN"))
     try:
-        _classify(load_config(), meta, snapshot, day, gh, args.dry_run)
+        _classify(load_config(), meta, snapshot, day, gh, args.dry_run, _baselines(day))
     finally:
         gh.close()
     return 0
@@ -127,8 +161,12 @@ def cmd_render(args: argparse.Namespace) -> int:
     meta, snapshot, day = loaded
     use_out = args.dry_run and (OUT_DIR / "classified.json").is_file()
     labels = store.load_classified(OUT_DIR if use_out else store.DATA_DIR)
-    path = _write_readme(render_readme(load_config(), meta, snapshot, day, datetime.now(UTC), labels), args.dry_run)
-    log.info("wrote %s", path)
+    daily_base, weekly_base = _baselines(day)
+    _write_outputs(
+        (load_config(), meta, snapshot, day, datetime.now(UTC), labels),
+        {"daily_base": daily_base, "weekly_base": weekly_base},
+        args.dry_run,
+    )
     return 0
 
 
