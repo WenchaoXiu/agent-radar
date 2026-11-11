@@ -1,32 +1,51 @@
 {%- macro span(base) -%}
 对比 {{ base.day }} 的快照{% if base.days > 1 %}（实际跨 {{ base.days }} 天）{% endif %}
 {%- endmacro -%}
-{%- macro table(rows, growth_label="日增", growth_first=false, show_category=true, date_label="最近推送", date_key="pushed_at") -%}
-<div class="scroll"><table>
-<thead><tr><th class="num">#</th><th>仓库</th>{% if show_category %}<th>分类</th>{% endif %}<th>简介</th>
-{%- if growth_first %}<th class="num">{{ growth_label }}</th><th class="num">Star</th>{% else %}<th class="num">Star</th><th class="num">{{ growth_label }}</th>{% endif -%}
-<th>语言</th><th>{{ date_label }}</th></tr></thead>
-<tbody>
+
+{%- macro card(r, mx, growth_label="日增", show_category=true, date_label="推送于", date_key="pushed_at") -%}
+{%- set owner, name = r.repo.split("/", 1) -%}
+<li class="card" data-cat="{{ r.category }}" data-text="{{ (r.repo ~ ' ' ~ r.summary ~ ' ' ~ r.category) | lower }}">
+  <span class="rank{% if r.rank <= 3 %} top top{{ r.rank }}{% endif %}">{{ r.rank }}</span>
+  <div class="body">
+    <div class="title">
+      <a href="https://github.com/{{ r.repo }}" rel="noopener" target="_blank"><span class="owner">{{ owner }}/</span><span class="name">{{ name }}</span></a>
+      {%- if show_category and r.category %}<span class="tag">{{ r.category }}</span>{% endif %}
+      {%- if r.is_new %}<span class="new">NEW</span>{% endif %}
+    </div>
+    {%- if r.summary %}<p class="summary" title="{{ r.summary }}">{{ r.summary }}</p>{% endif %}
+    <div class="meta">
+      {%- if r.language %}<span><i class="dot" style="background:{{ r.language | lang_color }}"></i>{{ r.language }}</span>{% endif %}
+      <span class="mono">★ {{ r.stars | thousands }}</span>
+      {%- if r[date_key] %}<span>{{ date_label }} {{ r[date_key] | day }}</span>{% endif %}
+      {%- if r.summary_zh or r.key_features %}
+      <details class="info"><summary>详情</summary>
+        <div class="info-body">
+        {%- if r.summary_zh %}<p>{{ r.summary_zh }}</p>{% endif %}
+        {%- if r.key_features %}<ul>{% for f in r.key_features %}<li>{{ f }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+      </details>
+      {%- endif %}
+    </div>
+  </div>
+  <div class="growth">
+    {%- if r.is_new %}<span class="g-val muted">🆕</span><span class="g-label">首次入池</span>
+    {%- elif r.growth is not none %}
+      {%- set pct = (r.growth / mx * 100) if (mx and r.growth > 0) else 0 %}
+      <span class="g-val{% if r.growth <= 0 %} muted{% endif %}">{{ r | growth }}</span><span class="g-label">{{ growth_label }}</span>
+      <span class="bar"><i style="width:{{ '%.1f' % pct }}%"></i></span>
+    {%- endif %}
+  </div>
+</li>
+{%- endmacro -%}
+
+{%- macro board(id, rows, growth_label="日增", show_category=true, date_label="推送于", date_key="pushed_at") -%}
+{%- set mx = max_growth(rows) -%}
+<ol class="list" id="list-{{ id }}" data-list>
 {%- for r in rows %}
-<tr>
-<td class="num">{{ r.rank }}</td>
-<td class="repo"><a href="https://github.com/{{ r.repo }}" rel="noopener">{{ r.repo }}</a></td>
-{%- if show_category %}<td>{% if r.category %}<span class="tag">{{ r.category }}</span>{% endif %}</td>{% endif %}
-<td class="desc">
-{%- if r.summary_zh or r.key_features -%}
-<details><summary>{{ r.summary }}</summary>
-{%- if r.summary_zh %}<p>{{ r.summary_zh }}</p>{% endif -%}
-{%- if r.key_features %}<ul>{% for f in r.key_features %}<li>{{ f }}</li>{% endfor %}</ul>{% endif -%}
-</details>
-{%- else -%}{{ r.summary }}{%- endif -%}
-</td>
-{%- if growth_first %}<td class="num up">{{ r | growth }}</td><td class="num">{{ r.stars | thousands }}</td>
-{%- else %}<td class="num">{{ r.stars | thousands }}</td><td class="num up">{{ r | growth }}</td>{% endif %}
-<td>{{ r.language }}</td>
-<td class="date">{{ r[date_key] | day }}</td>
-</tr>
+{{ card(r, mx, growth_label, show_category, date_label, date_key) }}
 {%- endfor %}
-</tbody></table></div>
+</ol>
+<button class="more" type="button" data-more="list-{{ id }}" hidden></button>
 {%- endmacro -%}
 <!doctype html>
 <html lang="zh-CN">
@@ -36,75 +55,297 @@
 <title>Agent Radar · AI Agent 开源项目榜单</title>
 <meta name="description" content="AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日自动更新。">
 <style>
-:root { --fg:#1f2328; --muted:#59636e; --border:#d1d9e0; --bg:#fff; --alt:#f6f8fa; --accent:#0969da; --up:#1a7f37; }
+:root {
+  --bg:#fafafa; --card:#fff; --fg:#0a0a0a; --muted:#6b7280; --faint:#9ca3af; --border:#e5e7eb; --hover:#d1d5db;
+  --accent:#4f46e5; --accent2:#06b6d4; --accent-soft:#eef2ff; --up:#059669; --grid:rgba(79,70,229,.07);
+  --shadow:0 1px 2px rgba(0,0,0,.04); --shadow-hover:0 4px 16px rgba(79,70,229,.10);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
 @media (prefers-color-scheme: dark) {
-  :root { --fg:#e6edf3; --muted:#9198a1; --border:#3d444d; --bg:#0d1117; --alt:#151b23; --accent:#4493f8; --up:#3fb950; }
+  :root {
+    --bg:#09090b; --card:#111113; --fg:#fafafa; --muted:#a1a1aa; --faint:#71717a; --border:#27272a; --hover:#3f3f46;
+    --accent:#818cf8; --accent2:#22d3ee; --accent-soft:rgba(129,140,248,.12); --up:#34d399; --grid:rgba(129,140,248,.08);
+    --shadow:none; --shadow-hover:0 4px 20px rgba(129,140,248,.12);
+  }
 }
 * { box-sizing:border-box; }
-body { margin:0; font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif; color:var(--fg); background:var(--bg); }
-main { max-width:1280px; margin:0 auto; padding:24px 16px 48px; }
-h1 { margin:0 0 4px; font-size:28px; }
-h2 { margin:40px 0 8px; padding-top:8px; border-top:1px solid var(--border); }
-h3 { margin:24px 0 8px; }
-.meta, .note { color:var(--muted); margin:4px 0 12px; }
-nav { position:sticky; top:0; z-index:1; background:var(--bg); border-bottom:1px solid var(--border); padding:8px 0; display:flex; flex-wrap:wrap; gap:6px 16px; }
-a { color:var(--accent); text-decoration:none; }
-a:hover { text-decoration:underline; }
-.scroll { overflow-x:auto; }
-table { border-collapse:collapse; width:100%; }
-th, td { padding:6px 8px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
-th { position:sticky; top:0; background:var(--alt); white-space:nowrap; }
-tbody tr:nth-child(even) { background:var(--alt); }
-.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
-.up { color:var(--up); }
-.repo, .date { white-space:nowrap; }
-.desc { min-width:280px; }
-.desc summary { cursor:pointer; }
-.desc p, .desc ul { margin:6px 0; color:var(--muted); }
-.desc ul { padding-left:18px; }
-.tag { display:inline-block; padding:0 6px; border:1px solid var(--border); border-radius:10px; font-size:12px; white-space:nowrap; }
-footer { margin-top:40px; color:var(--muted); font-size:12px; }
+html { scroll-padding-top:120px; }
+body { margin:0; font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif; color:var(--fg); background:var(--bg); -webkit-font-smoothing:antialiased; }
+a { color:inherit; text-decoration:none; }
+.wrap { max-width:960px; margin:0 auto; padding:0 20px; }
+.mono { font-family:var(--mono); font-variant-numeric:tabular-nums; }
+
+/* hero */
+.hero { position:relative; padding:56px 0 28px; border-bottom:1px solid var(--border);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px; background-position:center top; }
+.hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,var(--bg)); pointer-events:none; }
+.hero .wrap { position:relative; z-index:1; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; font:12px var(--mono); color:var(--muted); border:1px solid var(--border); background:var(--card); border-radius:999px; padding:3px 10px; }
+.pulse { width:7px; height:7px; border-radius:50%; background:var(--up); box-shadow:0 0 0 3px color-mix(in srgb,var(--up) 25%,transparent); }
+h1 { margin:14px 0 6px; font-size:40px; line-height:1.1; letter-spacing:-.03em; }
+h1 span { background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lead { margin:0; color:var(--muted); font-size:15px; }
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px; }
+.stat { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow); min-width:0; }
+.stat .k { font-size:12px; color:var(--muted); }
+.stat .v { font:600 24px/1.3 var(--mono); letter-spacing:-.02em; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.stat .v.up { color:var(--up); }
+.stat .s { font-size:12px; color:var(--faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* tabs + toolbar */
+.bar-top { position:sticky; top:0; z-index:5; background:color-mix(in srgb,var(--bg) 85%,transparent); backdrop-filter:saturate(180%) blur(12px); -webkit-backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--border); }
+.tabs { display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; padding:10px 0 0; }
+.tabs a { position:relative; padding:8px 14px 12px; color:var(--muted); font-weight:500; white-space:nowrap; }
+.tabs a:hover { color:var(--fg); }
+.tabs a .n { font:11px var(--mono); color:var(--faint); margin-left:4px; }
+.tabs a[aria-selected="true"] { color:var(--fg); }
+.tabs a[aria-selected="true"]::after { content:""; position:absolute; left:14px; right:14px; bottom:-1px; height:2px; border-radius:2px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+.toolbar { display:none; gap:12px; align-items:center; padding:10px 0 12px; }
+.js .toolbar { display:flex; }
+.chips { display:flex; gap:6px; flex:1; min-width:0; overflow-x:auto; scrollbar-width:none; -webkit-mask-image:linear-gradient(90deg,#000 92%,transparent); mask-image:linear-gradient(90deg,#000 92%,transparent); padding-right:24px; }
+.chips::-webkit-scrollbar, .tabs::-webkit-scrollbar { display:none; }
+.chip { flex:none; white-space:nowrap; border:1px solid var(--border); background:var(--card); color:var(--muted); border-radius:999px; padding:3px 11px; font:inherit; font-size:12px; cursor:pointer; }
+.chip:hover { border-color:var(--hover); color:var(--fg); }
+.chip[aria-pressed="true"] { background:var(--fg); border-color:var(--fg); color:var(--bg); }
+.search { position:relative; }
+.search { flex:none; }
+.search input { width:200px; border:1px solid var(--border); background:var(--card); color:var(--fg); border-radius:8px; padding:6px 10px 6px 30px; font:inherit; font-size:13px; outline:none; }
+.search input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+.search svg { position:absolute; left:9px; top:50%; transform:translateY(-50%); color:var(--faint); }
+
+/* panels */
+main { padding:24px 0 64px; }
+.panel { margin-bottom:48px; }
+.js .panel { margin-bottom:0; }
+.panel-head { display:grid; grid-template-columns:1fr auto; align-items:baseline; row-gap:2px; margin-bottom:14px; }
+.panel-head .note { grid-column:1/-1; grid-row:2; }
+.panel-head h2 { margin:0; font-size:20px; letter-spacing:-.01em; }
+.note { color:var(--muted); font-size:12px; }
+.count { font:12px var(--mono); color:var(--faint); }
+.group { margin-top:28px; }
+.group:first-of-type { margin-top:0; }
+.group h3 { display:flex; align-items:center; gap:8px; margin:0 0 10px; font-size:15px; }
+.group h3 .n { font:12px var(--mono); color:var(--faint); }
+.empty { display:none; text-align:center; color:var(--muted); padding:40px 0; border:1px dashed var(--border); border-radius:12px; }
+
+/* cards */
+.list { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.card { display:grid; grid-template-columns:36px minmax(0,1fr) 128px; gap:14px; align-items:start; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow); transition:border-color .15s,box-shadow .15s,transform .15s; }
+.card:hover { border-color:var(--hover); box-shadow:var(--shadow-hover); }
+.card[hidden] { display:none; }
+.rank { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; font:600 13px var(--mono); color:var(--muted); background:var(--bg); border:1px solid var(--border); }
+.rank.top { color:#fff; border:0; }
+.rank.top1 { background:linear-gradient(135deg,var(--accent),var(--accent2)); }
+.rank.top2 { background:linear-gradient(135deg,#6366f1,#8b5cf6); }
+.rank.top3 { background:linear-gradient(135deg,#8b5cf6,#a855f7); }
+.title { display:flex; align-items:center; gap:8px; flex-wrap:wrap; min-width:0; }
+.title a { font-size:15px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.title a:hover .name { color:var(--accent); }
+.owner { color:var(--muted); }
+.name { font-weight:600; }
+.tag { font-size:11px; color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:1px 7px; white-space:nowrap; }
+.new { font:600 10px var(--mono); color:var(--up); border:1px solid currentColor; border-radius:4px; padding:0 4px; letter-spacing:.04em; }
+.summary { margin:4px 0 0; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.meta { display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px; margin-top:8px; font-size:12px; color:var(--faint); }
+.meta > span { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+.info[open] { flex-basis:100%; }
+.info summary { display:inline-flex; cursor:pointer; color:var(--accent); list-style:none; width:max-content; }
+.info summary::-webkit-details-marker { display:none; }
+.info summary::after { content:"▾"; margin-left:4px; transition:transform .15s; }
+.info[open] summary::after { transform:rotate(180deg); }
+.info-body { margin-top:8px; padding:10px 12px; border-radius:8px; background:var(--bg); border:1px solid var(--border); color:var(--muted); font-size:13px; line-height:1.65; }
+.info-body p { margin:0; }
+.info-body ul { margin:8px 0 0; padding-left:18px; }
+.growth { display:grid; grid-template-columns:auto 1fr; align-items:baseline; column-gap:6px; justify-items:end; text-align:right; }
+.g-val { font:600 16px var(--mono); color:var(--up); letter-spacing:-.02em; grid-column:1/-1; }
+.g-val.muted { color:var(--faint); }
+.g-label { grid-column:1/-1; font-size:11px; color:var(--faint); }
+.bar { grid-column:1/-1; width:100%; height:4px; border-radius:4px; background:var(--border); overflow:hidden; margin-top:6px; }
+.bar i { display:block; height:100%; border-radius:4px; background:linear-gradient(90deg,var(--accent2),var(--accent)); }
+.more { display:block; margin:12px auto 0; border:1px solid var(--border); background:var(--card); color:var(--fg); border-radius:8px; padding:7px 16px; font:inherit; font-size:13px; cursor:pointer; }
+.more:hover { border-color:var(--accent); color:var(--accent); }
+.more[hidden] { display:none; }
+
+footer { border-top:1px solid var(--border); padding:24px 0 40px; color:var(--faint); font-size:12px; }
+footer a { color:var(--muted); text-decoration:underline; text-underline-offset:2px; }
+
+@media (max-width: 720px) {
+  h1 { font-size:30px; }
+  .hero { padding-top:36px; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .card { grid-template-columns:28px minmax(0,1fr); gap:10px; padding:12px; }
+  .rank { width:28px; height:28px; font-size:12px; }
+  .growth { grid-column:2; grid-template-columns:auto auto 1fr; justify-items:start; text-align:left; align-items:center; column-gap:8px; }
+  .g-val, .g-label { grid-column:auto; }
+  .bar { grid-column:auto; margin-top:0; max-width:160px; }
+  .toolbar { gap:8px; }
+  .search input { width:118px; }
+  .search input:focus { width:160px; }
+}
 </style>
 </head>
 <body>
-<main>
-<h1>Agent Radar</h1>
-<p class="meta">AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单，每日自动更新。</p>
-<p class="meta">更新时间：{{ generated_at }} UTC · 收录仓库：{{ repo_count | thousands }} 个（star ≥ {{ min_stars }}，不含 fork 和已归档仓库）</p>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><i class="pulse"></i>每日自动更新 · {{ generated_at }} UTC</span>
+    <h1>Agent <span>Radar</span></h1>
+    <p class="lead">AI Agents / MCP / Skills / Harness 方向的 GitHub 开源项目榜单</p>
+    <div class="stats">
+      <div class="stat"><div class="k">收录仓库</div><div class="v">{{ repo_count | thousands }}</div><div class="s">star ≥ {{ min_stars }}，不含 fork 和归档</div></div>
+      {%- if top_mover %}
+      <div class="stat"><div class="k">今日涨幅第一</div><div class="v up">{{ top_mover | growth }}</div><div class="s" title="{{ top_mover.repo }}">{{ top_mover.repo }}</div></div>
+      {%- elif total %}
+      <div class="stat"><div class="k">Star 最多</div><div class="v">{{ total[0].stars | thousands }}</div><div class="s" title="{{ total[0].repo }}">{{ total[0].repo }}</div></div>
+      {%- endif %}
+      <div class="stat"><div class="k">新项目</div><div class="v">{{ new | length }}</div><div class="s">{{ new_repo_days }} 天内创建</div></div>
+      <div class="stat"><div class="k">已分类相关项目</div><div class="v">{{ relevant_count | thousands }}</div><div class="s">{{ category_names | length }} 个分类 · LLM 判定</div></div>
+    </div>
+  </div>
+</header>
 
-<nav>
-<a href="#total">总榜</a>
-{%- if daily_base %} <a href="#daily">日增</a>{% endif %}
-{%- if weekly_base %} <a href="#weekly">周增</a>{% endif %}
- <a href="#new">新项目</a>
-{%- if categories %} <a href="#categories">分类榜</a>{% endif %}
-</nav>
+<div class="bar-top">
+  <div class="wrap">
+    <nav class="tabs" role="tablist">
+      <a href="#panel-total" data-tab="total" role="tab">总榜<span class="n">{{ total | length }}</span></a>
+      {%- if daily_base %}<a href="#panel-daily" data-tab="daily" role="tab">日增<span class="n">{{ daily | length }}</span></a>{% endif %}
+      {%- if weekly_base %}<a href="#panel-weekly" data-tab="weekly" role="tab">周增<span class="n">{{ weekly | length }}</span></a>{% endif %}
+      <a href="#panel-new" data-tab="new" role="tab">新项目<span class="n">{{ new | length }}</span></a>
+      {%- if categories %}<a href="#panel-categories" data-tab="categories" role="tab">分类<span class="n">{{ category_names | length }}</span></a>{% endif %}
+    </nav>
+    <div class="toolbar">
+      <div class="chips">
+        <button class="chip" type="button" data-chip="" aria-pressed="true">全部</button>
+        {%- for c in category_names %}<button class="chip" type="button" data-chip="{{ c }}" aria-pressed="false">{{ c }}</button>{% endfor %}
+      </div>
+      <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="搜索仓库 / 简介" autocomplete="off"></label>
+    </div>
+  </div>
+</div>
 
-<h2 id="total">总榜 Top {{ total | length }}</h2>
-{% if daily_base %}<p class="note">日增{{ span(daily_base) }}；🆕 表示首次入池。点击简介可展开详细说明。</p>{% endif %}
-{{ table(total) }}
-{% if daily_base %}
-<h2 id="daily">日增 Top {{ daily | length }}</h2>
-<p class="note">{{ span(daily_base) }}。首次入池的仓库不参与排名。</p>
-{% if daily %}{{ table(daily, growth_first=true) }}{% else %}<p>暂无 star 增长的仓库。</p>{% endif %}
-{% endif %}
+<main class="wrap">
+<section class="panel" id="panel-total" data-panel="total">
+  <div class="panel-head"><h2>总榜</h2><span class="note">按当前 star 排序{% if daily_base %} · 日增{{ span(daily_base) }}{% endif %}</span><span class="count" data-count></span></div>
+  {{ board("total", total) }}
+  <div class="empty">没有匹配的项目</div>
+</section>
+{%- if daily_base %}
+<section class="panel" id="panel-daily" data-panel="daily">
+  <div class="panel-head"><h2>日增</h2><span class="note">{{ span(daily_base) }} · 首次入池的仓库不参与排名</span><span class="count" data-count></span></div>
+  {% if daily %}{{ board("daily", daily) }}{% endif %}
+  <div class="empty"{% if not daily %} style="display:block"{% endif %}>{% if daily %}没有匹配的项目{% else %}暂无 star 增长的仓库{% endif %}</div>
+</section>
+{%- endif %}
 {%- if weekly_base %}
-<h2 id="weekly">周增 Top {{ weekly | length }}</h2>
-<p class="note">{{ span(weekly_base) }}。首次入池的仓库不参与排名。</p>
-{% if weekly %}{{ table(weekly, growth_label="周增", growth_first=true) }}{% else %}<p>暂无 star 增长的仓库。</p>{% endif %}
-{% endif %}
-<h2 id="new">新项目 Top {{ new | length }}</h2>
-<p class="note">{{ new_repo_days }} 天内创建且 star ≥ {{ min_stars }}。</p>
-{% if new %}{{ table(new, date_label="创建日期", date_key="created_at") }}{% else %}<p>暂无符合条件的新项目。</p>{% endif %}
-{% if categories %}
-<h2 id="categories">分类榜</h2>
-<p class="note">按 LLM 分类分组，每类按 star 取前 {{ category_size }} 个。</p>
-{% for category, rows in categories %}
-<h3>{{ category }}</h3>
-{{ table(rows, show_category=false) }}
-{% endfor %}
-{% endif %}
-<footer>数据来源：GitHub Search API。分类和中文简介由 LLM 生成，仅供参考。本页由 <a href="https://github.com/WenchaoXiu/agent-radar">agent-radar</a> 自动生成。</footer>
+<section class="panel" id="panel-weekly" data-panel="weekly">
+  <div class="panel-head"><h2>周增</h2><span class="note">{{ span(weekly_base) }} · 首次入池的仓库不参与排名</span><span class="count" data-count></span></div>
+  {% if weekly %}{{ board("weekly", weekly, growth_label="周增") }}{% endif %}
+  <div class="empty"{% if not weekly %} style="display:block"{% endif %}>{% if weekly %}没有匹配的项目{% else %}暂无 star 增长的仓库{% endif %}</div>
+</section>
+{%- endif %}
+<section class="panel" id="panel-new" data-panel="new">
+  <div class="panel-head"><h2>新项目</h2><span class="note">{{ new_repo_days }} 天内创建且 star ≥ {{ min_stars }}</span><span class="count" data-count></span></div>
+  {% if new %}{{ board("new", new, date_label="创建于", date_key="created_at") }}{% endif %}
+  <div class="empty"{% if not new %} style="display:block"{% endif %}>{% if new %}没有匹配的项目{% else %}暂无符合条件的新项目{% endif %}</div>
+</section>
+{%- if categories %}
+<section class="panel" id="panel-categories" data-panel="categories">
+  <div class="panel-head"><h2>分类榜</h2><span class="note">按 LLM 分类分组，每类按 star 取前 {{ category_size }} 个</span><span class="count" data-count></span></div>
+  {%- for category, rows in categories %}
+  <div class="group" data-group>
+    <h3><span class="tag">{{ category }}</span><span class="n">{{ rows | length }}</span></h3>
+    {{ board("cat-" ~ loop.index, rows, show_category=false) }}
+  </div>
+  {%- endfor %}
+  <div class="empty">没有匹配的项目</div>
+</section>
+{%- endif %}
 </main>
+
+<footer>
+  <div class="wrap">数据来源：GitHub Search API。分类和中文简介由 LLM 生成，仅供参考。本页由 <a href="https://github.com/WenchaoXiu/agent-radar">agent-radar</a> 自动生成。</div>
+</footer>
+
+<script>
+(function () {
+  var VISIBLE = {{ visible_rows }};
+  document.documentElement.classList.add("js");
+  var tabs = [].slice.call(document.querySelectorAll("[data-tab]"));
+  var panels = [].slice.call(document.querySelectorAll("[data-panel]"));
+  var chips = [].slice.call(document.querySelectorAll("[data-chip]"));
+  var input = document.getElementById("q");
+  var state = { tab: panels[0].dataset.panel, cat: "", q: "", expanded: {} };
+
+  function apply() {
+    var panel = document.getElementById("panel-" + state.tab);
+    var filtering = !!(state.cat || state.q);
+    var total = 0;
+    panel.querySelectorAll("[data-list]").forEach(function (list) {
+      var limit = filtering || state.expanded[list.id] ? Infinity : VISIBLE;
+      var matched = 0;
+      list.querySelectorAll(".card").forEach(function (c) {
+        var ok = (!state.cat || c.dataset.cat === state.cat) && (!state.q || c.dataset.text.indexOf(state.q) >= 0);
+        if (ok) matched++;
+        c.hidden = !(ok && matched <= limit);
+      });
+      total += matched;
+      var group = list.closest("[data-group]");
+      if (group) {
+        group.hidden = matched === 0;
+        group.querySelector("h3 .n").textContent = matched;
+      }
+      var more = panel.querySelector('[data-more="' + list.id + '"]');
+      if (more) {
+        if (filtering || matched <= VISIBLE) { more.hidden = true; }
+        else {
+          more.hidden = false;
+          more.textContent = state.expanded[list.id] ? "收起" : "展开剩余 " + (matched - VISIBLE) + " 个";
+        }
+      }
+    });
+    var count = panel.querySelector("[data-count]");
+    if (count) count.textContent = total + " 个项目";
+    var empty = panel.querySelector(".empty");
+    if (empty && panel.querySelector("[data-list]")) empty.style.display = total ? "none" : "block";
+  }
+
+  function show(id, scroll) {
+    id = id.replace(/^panel-/, "");
+    if (!panels.some(function (p) { return p.dataset.panel === id; })) id = panels[0].dataset.panel;
+    state.tab = id;
+    tabs.forEach(function (t) { t.setAttribute("aria-selected", String(t.dataset.tab === id)); });
+    panels.forEach(function (p) { p.hidden = p.dataset.panel !== id; });
+    apply();
+    if (scroll) window.scrollTo({ top: Math.min(window.scrollY, document.querySelector(".bar-top").offsetTop) });
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function (e) {
+      e.preventDefault();
+      history.replaceState(null, "", "#" + t.dataset.tab);
+      show(t.dataset.tab, true);
+    });
+  });
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      state.cat = c.dataset.chip;
+      chips.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); });
+      apply();
+    });
+  });
+  input.addEventListener("input", function () { state.q = input.value.trim().toLowerCase(); apply(); });
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-more]");
+    if (!btn) return;
+    var id = btn.dataset.more;
+    state.expanded[id] = !state.expanded[id];
+    apply();
+    if (!state.expanded[id]) document.getElementById(id).scrollIntoView({ block: "start" });
+  });
+  window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
+  show(location.hash.slice(1));
+})();
+</script>
 </body>
 </html>

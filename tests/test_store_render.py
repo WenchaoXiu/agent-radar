@@ -64,9 +64,10 @@ def test_render_readme(cfg, today):
     }
     snap = {"o/old": [12345, 0], "o/new": [150, 0]}
     out = render_readme(cfg, meta, snap, today, datetime(2026, 11, 8, 0, 5))
-    assert "| 1 | [o/old](https://github.com/o/old) |  | pipe \\| here | 12,345 |  | Go | 2026-11-07 |" in out
-    assert "| 1 | [o/new](https://github.com/o/new) |  |  | 150 |  |  | 2026-11-01 |" in out
+    assert "| 1 | [o/old](https://github.com/o/old) |  | pipe \\| here | 12,345 |  |" in out
+    assert "| 1 | [o/new](https://github.com/o/new) |  |  | 150 |  |" in out
     assert "## 日增" not in out and "## 周增" not in out
+    assert "](https://wenchaoxiu.github.io/agent-radar/)" in out and "<details>" not in out
     assert "2026-11-08 00:05" in out
 
 
@@ -80,7 +81,20 @@ def test_render_readme_with_labels(cfg, today):
     assert "| 1 | [o/a](https://github.com/o/a) | Coding Agent | 写代码的 Agent | 300 |" in out
     assert "o/b" not in out and "o/c" not in out
     assert "[分类榜](#分类榜)" in out and "### Coding Agent" in out
-    assert "| 1 | [o/a](https://github.com/o/a) | 写代码的 Agent | 300 |" in out
+    assert "| 1 | [o/a](https://github.com/o/a) | 写代码的 Agent | 300 |  |" in out
+
+
+def test_render_readme_folds_rows_beyond_visible(cfg, today):
+    names = [f"o/r{i:02d}" for i in range(25)]
+    meta = {n: {"description": "d", "created_at": "2024-01-01T00:00:00Z", "pushed_at": "2026-11-07T00:00:00Z"}
+            for n in names}
+    snap = {n: [1000 - i, 0] for i, n in enumerate(names)}
+    out = render_readme(cfg, meta, snap, today, datetime(2026, 11, 8))
+    head, folded = out.split("<details><summary>展开剩余 5 个</summary>")
+    assert "| 20 | [o/r19]" in head and "| 21 |" not in head
+    assert folded.startswith("\n\n| # | 仓库 | 分类 | 简介 | Star | 日增 |")
+    assert "| 21 | [o/r20]" in folded and "| 25 | [o/r24]" in folded
+    assert folded.count("</details>") == 1
 
 
 GROWTH_META = {n: {"description": "d", "language": "Py", "created_at": "2024-01-01T00:00:00Z",
@@ -110,8 +124,22 @@ def test_render_pages_escapes_untrusted_text(cfg, today):
     out = render_pages(cfg, meta, GROWTH_SNAP, today, datetime(2026, 11, 8), labels, daily_base=daily)
     assert "<script>alert" not in out and "&lt;script&gt;alert(1)&lt;/script&gt;" in out
     assert "说明 &lt;b&gt;x&lt;/b&gt;" in out and "<li>功能一</li>" in out
-    assert 'href="#daily"' in out and 'id="weekly"' not in out
+    # Tabs: daily present, weekly hidden without a baseline.
+    assert 'data-tab="daily"' in out and 'data-panel="daily"' in out
+    assert 'data-tab="weekly"' not in out and 'data-panel="weekly"' not in out
     assert "+50" in out and "🆕" in out
+    # Cards: language dot color, search text, category chip, growth bar relative to board max.
+    assert 'style="background:#8b949e"' in out  # "Py" is not a known language
+    assert 'data-chip="Coding Agent"' in out
+    assert 'data-text="o/b 一句话 coding agent"' in out
+    assert '<i style="width:100.0%">' in out and '<i style="width:20.0%">' in out
+    assert "var VISIBLE = 20;" in out
+
+
+def test_render_pages_hero_without_daily_baseline(cfg, today):
+    out = render_pages(cfg, GROWTH_META, GROWTH_SNAP, today, datetime(2026, 11, 8))
+    assert "今日涨幅第一" not in out and "Star 最多" in out
+    assert 'data-tab="daily"' not in out and '<span class="bar">' not in out
 
 
 def test_load_baseline(tmp_path):
