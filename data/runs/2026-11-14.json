@@ -1,0 +1,59 @@
+[
+ {
+  "command": "daily",
+  "started_at": "2026-11-14T02:28:04Z",
+  "status": "ok",
+  "collect": {
+   "queries": 27,
+   "repos": 13458,
+   "github_requests": 372
+  },
+  "baselines": {
+   "daily": {
+    "day": "2026-11-13",
+    "days": 1
+   },
+   "weekly": null
+  },
+  "classify": {
+   "classified": 19,
+   "refreshed": 0,
+   "pending": [],
+   "failures": {},
+   "aborted": null,
+   "usage": {
+    "claude-sonnet-5-5": {
+     "calls": 23,
+     "prompt": 125997,
+     "completion": 24038
+    }
+   },
+   "total_labels": 356
+  },
+  "boards": {
+   "total": 100,
+   "daily": 50,
+   "weekly": 0,
+   "new": 50,
+   "categories": 7,
+   "listed_repos": 163,
+   "unclassified_listed": 0
+  },
+  "finished_at": "2026-11-14T02:44:30Z",
+  "duration_s": 986,
+  "warnings": [
+   "WARNING agent_radar.github_api: GET /search/repositories -> 502, retry in 1s",
+   "WARNING agent_radar.classify: classify batch unparsable: JSONDecodeError",
+   "WARNING agent_radar.classify: saved unparsable reply to /home/runner/work/agent-radar/agent-radar/out/classify-failures/20261114-024231-609766-EricJujianZou_rederive.txt",
+   "WARNING agent_radar.classify: classify attempt 1: 1 repos failed",
+   "WARNING agent_radar.classify: classify batch unparsable: JSONDecodeError",
+   "WARNING agent_radar.classify: saved unparsable reply to /home/runner/work/agent-radar/agent-radar/out/classify-failures/20261114-024310-907988-beluga-labs_beluga.txt",
+   "WARNING agent_radar.classify: classify attempt 1: 1 repos failed",
+   "WARNING agent_radar.classify: classify batch unparsable: JSONDecodeError",
+   "WARNING agent_radar.classify: saved unparsable reply to /home/runner/work/agent-radar/agent-radar/out/classify-failures/20261114-024339-974258-openfilm_openfilm.txt",
+   "WARNING agent_radar.classify: classify batch unparsable: JSONDecodeError",
+   "WARNING agent_radar.classify: saved unparsable reply to /home/runner/work/agent-radar/agent-radar/out/classify-failures/20261114-024357-431820-dansugc_reverse-engineer-marketing.txt",
+   "WARNING agent_radar.classify: classify attempt 1: 2 repos failed"
+  ]
+ }
+]
