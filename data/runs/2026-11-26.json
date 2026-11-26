@@ -1,0 +1,49 @@
+[
+ {
+  "command": "daily",
+  "started_at": "2026-11-26T04:10:35Z",
+  "status": "ok",
+  "collect": {
+   "queries": 27,
+   "repos": 14193,
+   "github_requests": 388
+  },
+  "baselines": {
+   "daily": {
+    "day": "2026-11-25",
+    "days": 1
+   },
+   "weekly": {
+    "day": "2026-11-19",
+    "days": 7
+   }
+  },
+  "classify": {
+   "classified": 15,
+   "refreshed": 0,
+   "pending": [],
+   "failures": {},
+   "aborted": null,
+   "usage": {
+    "claude-sonnet-5-5": {
+     "calls": 15,
+     "prompt": 148434,
+     "completion": 21583
+    }
+   },
+   "total_labels": 489
+  },
+  "boards": {
+   "total": 100,
+   "daily": 50,
+   "weekly": 50,
+   "new": 50,
+   "categories": 7,
+   "listed_repos": 169,
+   "unclassified_listed": 0
+  },
+  "finished_at": "2026-11-26T04:27:48Z",
+  "duration_s": 1033,
+  "warnings": []
+ }
+]
