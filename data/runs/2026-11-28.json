@@ -1,0 +1,52 @@
+[
+ {
+  "command": "daily",
+  "started_at": "2026-11-28T03:54:53Z",
+  "status": "ok",
+  "collect": {
+   "queries": 27,
+   "repos": 14253,
+   "github_requests": 386
+  },
+  "baselines": {
+   "daily": {
+    "day": "2026-11-27",
+    "days": 1
+   },
+   "weekly": {
+    "day": "2026-11-21",
+    "days": 7
+   }
+  },
+  "classify": {
+   "classified": 12,
+   "refreshed": 0,
+   "pending": [],
+   "failures": {},
+   "aborted": null,
+   "usage": {
+    "claude-sonnet-5-5": {
+     "calls": 13,
+     "prompt": 135741,
+     "completion": 22328
+    }
+   },
+   "total_labels": 514
+  },
+  "boards": {
+   "total": 100,
+   "daily": 50,
+   "weekly": 50,
+   "new": 50,
+   "categories": 7,
+   "listed_repos": 172,
+   "unclassified_listed": 0
+  },
+  "finished_at": "2026-11-28T04:11:54Z",
+  "duration_s": 1021,
+  "warnings": [
+   "WARNING agent_radar.classify: classify batch: 1/1 rejected, reasons {'long_one_liner_zh': 1}",
+   "WARNING agent_radar.classify: classify attempt 1: 1 repos failed"
+  ]
+ }
+]
